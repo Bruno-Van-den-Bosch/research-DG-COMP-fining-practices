@@ -1,2 +1,12 @@
 # research-DG-COMP-fining-practices
-Repository of code used in research into DG COMPs fining practices
+
+This repository bundels all code and files used in the (currently working) paper Bruno Van den Bosch and Friso Bostoen, "Opening the Black Box: Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis" (ssrn: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4232335).
+
+The abstract of the paper is as follows:
+While abuse of dominance fines have received plenty of attention, most of the European Commission’s fines target cartels. The Fining Guidelines, in particular their most recent version (2006), have increased the transparency of how the Commission calculates those fines. However, the precise factors determining the fine as well as the exact quantification remained unknown, which is why the fine-setting process has been likened to a ‘black box’. This article opens that black box by computationally and doctrinally assessing all cartel fines based on the Fining Guidelines from 2006 until 2020. In doing so, we also test the ‘protectionist hypothesis’, which holds that the Commission uses antitrust enforcement to disadvantage non-EU and in particular U.S. firms. For some steps of the fine calculation (the base amount and entry fee) and for some Commissioners (Almunia and Vestager), we find a remarkably consistent methodology. This methodology offers no evidence of the protectionist hypothesis and, to the extent that there is any indication of it, bias would be aimed at Asian rather than U.S. firms. In addition, the uncovered fining methodology reveals that the Commission plays it very safe when setting cartel fines, which is why we call for more boldness. At the same time, the General Court should subject the Commission’s fines to more scrutiny, especially when it comes to equal treatment over time (rather than between parties in the same decision).
+
+This repository thus contains the R script containing the model which automatically codes the variables for each party given the prohibition decision using regex expressions. The second part of the same R script then uses the variables to predict EU Competition fines in cartel cases using the RPart method.
+
+To use the R script the user needs to fill in the line with the directory containing all the the relevant prohibition decisions (in English), the location of the excel file containg the overview of fines (which can also be found here), and the location were to save the output. The output consists of the decision trees and the excel file of the coded variables. The titles of the files give the summary statistics of each output and the seed used to generate the output.
+
+!--Files will be uploaded as soon as possible
