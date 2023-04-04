@@ -1,6 +1,6 @@
 # Research-DG-COMP-fining-practices
 
-This repository bundles all code and files used in Bruno Van den Bosch and Friso Bostoen, "Opening the Black Box: Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis" (SSRN: (https://ssrn.com/abstract=4232335).
+This repository bundles all code and files used in Bruno Van den Bosch and Friso Bostoen, "Opening the Black Box: Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis" (SSRN: https://ssrn.com/abstract=4232335).
 
 ## Paper Abstract
 
