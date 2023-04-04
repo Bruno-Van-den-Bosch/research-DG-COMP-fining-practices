@@ -34,9 +34,9 @@ To use the script the following input needs to be added at the top of the script
 
 To model new fines:
 
-1. Annex 1 needs to be extended manually;
+1. Annex 1 needs to be extended manually.
 
-2. In case of a new Commissioner, lines 433 till 437 of the script need to be extended;
+2. In case of a new Commissioner, lines 433 till 437 of the script need to be extended.
 
 3. Beware that the current dataset contains too few cases with interim amounts for certain Commissioners. These amounts cannot be predicted. Therefore the model has an 'if else' structure excluding certain steps in the model for certain Commissioners. The list of Commissioners on line 437 thus needs to  be maintained.
 
