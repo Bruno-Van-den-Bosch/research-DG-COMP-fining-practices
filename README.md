@@ -49,9 +49,19 @@ To  use the application the following dependencies need to be installed:
 
 This  can be done through 'pip install 'dependencies_name''.
 
-Next, the app.py app needs to be launched (in terminal (app.py and compose-dataset need to be in the same folder): python3 'app.py'). When launched the app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
+Next, the app.py app needs to be launched (in terminal (app.py and compose-dataset need to be in the same folder): python3 'app.py'). When launched the app will give the choice between creating a new model or load an existing one.
+
+#### new model:
+
+The app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
 
 After hitting submit, the script will start running and a message will be displayed while the script runs. Be aware that large dataset will take considerable time. Next, the relevant files will be saved in the given location and the summary statistics will be given. The summary statistic per interim amount can be found below the decision tree.
+
+#### loading existing model:
+
+The app will let you browse your files to select the model you want to use. After which you can make prediction using the loaded model
+
+### predicting the fines
 
 Lastly, new cases can be predicted. After hitting submit a selection menu will open. Users need to fill in all free values (sales, duration, year), ticking a box means the variable is present, leaving it unticked means not present in the case.
 
