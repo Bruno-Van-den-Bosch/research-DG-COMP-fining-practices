@@ -34,6 +34,8 @@ The files are:
 
 8. template_variables.xlsx: this template contains all current variables with the relevant regex expressions. This template needs to be fed to  the application (through the GUI). This template can be extended or changed, yet top row needs to stay the same. 
 
+9. Complete_cartel_model_saved.obj: this is the saved object created out of the template files and all the relevant EC decisions. This obj can be loaded into the app and used to predict fines. The decision trees can also be saved to a folder of the users choosing. 
+
 ## Using the application
 
 To  use the application the following dependencies need to be installed:
@@ -59,7 +61,7 @@ After hitting submit, the script will start running and a message will be displa
 
 #### loading existing model:
 
-The app will let you browse your files to select the model you want to use. After which you can make prediction using the loaded model
+The app will let you browse your files to select the model you want to use. The app will then ask if you want to save the relevant decision trees, and if so at what location. You can make prediction using the loaded model on the next screen.
 
 ### predicting the fines
 
