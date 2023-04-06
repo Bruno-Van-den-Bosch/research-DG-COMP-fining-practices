@@ -45,13 +45,15 @@ To  use the application the following dependencies need to be installed:
 - sklearn
 - os
 
-Next, the app.py app needs to be launched. When launched the app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
+Next, the app.py app needs to be launched (in terminal (app.py and compose-dataset need to be in the same folder): python3 'app.py'). When launched the app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
 
 After hitting submit, the script will start running and a message will be displayed while the script runs. Be aware that large dataset will take considerable time. Next, the relevant files will be saved in the given location and the summary statistics will be given. The summary statistic per interim amount can be found below the decision tree.
 
 Lastly, new cases can be predicted. After hitting submit a selection menu will open. Users need to fill in all free values (sales, duration, year), ticking a box means the variable is present, leaving it unticked means not present in the case.
 
 The app will show the predictions based on the trained model and ask whether a new fine needs to be predicted. To close the app, close the window, then close the selection menu. This is a known issue, yet the program will have stopped.
+
+This app.py script can be made into an application using the standard methods (e.g. pyinstaller)
 
 ## Using the ANNEX script
 
