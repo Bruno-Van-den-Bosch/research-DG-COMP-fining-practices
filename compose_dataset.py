@@ -1,7 +1,8 @@
-# This script is the translation of the R script used in the paper
+# This script is the translation of the R script used in the paper (note that this translation is not exact)
 # Bruno Van den Bosch and Friso Bostoen, "Opening the Black Box:
-# Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis", Working paper,
-# for use for practitioners.
+# Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis", Working paper.
+# This script is made for use for practitioners.
+# This script is distributed onder the GNU General Public license
 # call all dependencies
 import re
 import pypdf
