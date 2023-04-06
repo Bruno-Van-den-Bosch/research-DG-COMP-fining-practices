@@ -1,58 +1,100 @@
 # The following is the user screen for the python translation of the fine prediction model
+import os.path
+
 import PySimpleGUI as sg
 import pandas as pd
+import pickle
 from compose_dataset import predictions, predictNewFine
 
-# start opening window for file selection
-sg.theme('Light Blue 1')
+def NewModelCreation():
+    '''
+    GUI for new model creation
+    :return:
+    '''
+    # start opening window for file selection
+    sg.theme('Light Blue 1')
+    layout = [[sg.Text('Please enter the necessary files to train the model')],
+          [sg.Text('Dataset of fines (excel template) :')],
+            [sg.InputText(), sg.FileBrowse()],
+          [sg.Text('Overview of (possible) variables (excel template) :')],
+              [sg.InputText(), sg.FileBrowse()],
+        [sg.Text("Folder EC Decisions (file name as: '[case number] [name].pdf', e.g. '123456 cartel.pdf' ")],
+              [sg.InputText(), sg.FolderBrowse()],
+          [sg.Text("Which Commissioners are in the dataset")],
+              [sg.Checkbox('Neelie Kroes', default=True), sg.Checkbox('Joaquin Almunia', default=True), sg.Checkbox('Margrethe Vestager', default=True)],
+        [sg.Text("what test set size (in float, e.g. 0.10)")],
+              [sg.InputText()],
+        [sg.Text("Enter the random integer for the random state")],
+              [sg.InputText()],
+        [sg.Text("Folder to put resulting decision trees into: ")],
+        [sg.InputText(), sg.FolderBrowse()],
+        [sg.Text("Use the following also as variable")],
+              [sg.Checkbox('year of decision', default=True), sg.Checkbox('sales', default=True)],
+          [sg.Submit(), sg.Cancel()]]
+    window = sg.Window('EC fine prediction program: new model', layout)
+    event, values = window.read()
+    window.close()
+    # create the correct values
+    location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10]             # get the data from the values dictionary
+    # start the program
+    if Kroes == Almunia == Vestager == True:
+        filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
+    elif Almunia == Vestager == True:
+        filters = ['Joaquin Almunia', 'Margrethe Vestager']
+    elif Kroes == Almunia == True:
+        filters = ['Neelie Kroes', 'Joaquin Almunia']
+    elif Kroes == Vestager == True:
+        filters = ['Neelie Kroes', 'Margrethe Vestager']
+    elif Kroes == True:
+        filters = ['Neelie Kroes']
+    elif Almunia == True:
+        filters = ['Joaquin Almunia']
+    elif Vestager == True:
+        filters = ['Margrethe Vestager']
+    else:
+        filters = ['Margrethe Vestager']
+    sg.theme('Light Blue 1')
+    if output_folder[-1] != '/':
+        output_folder = output_folder + '/'
+    sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
+    # create the model and create the decision tree files
+    models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales)  # filter value needs to be value with capital  begin letter (from dataframe)
+    return models, variable_names, extra_var_year, extra_var_sales
 
-layout = [[sg.Text('Please enter the necessary files to train the model')],
-      [sg.Text('Dataset of fines (excel template) :')],
-        [sg.InputText(), sg.FileBrowse()],
-      [sg.Text('Overview of (possible) variables (excel template) :')],
-          [sg.InputText(), sg.FileBrowse()],
-    [sg.Text("Folder EC Decisions (file name as: '[case number] [name].pdf', e.g. '123456 cartel.pdf' ")],
-          [sg.InputText(), sg.FolderBrowse()],
-      [sg.Text("Which Commissioners are in the dataset")],
-          [sg.Checkbox('Neelie Kroes', default=True), sg.Checkbox('Joaquin Almunia', default=True), sg.Checkbox('Margrethe Vestager', default=True)],
-    [sg.Text("what test set size (in float, e.g. 0.10)")],
-          [sg.InputText()],
-    [sg.Text("Enter the random integer for the random state")],
-          [sg.InputText()],
-    [sg.Text("Folder to put resulting decision trees into: ")],
-    [sg.InputText(), sg.FolderBrowse()],
-    [sg.Text("Use the following also as variable")],
-          [sg.Checkbox('year of decision', default=True), sg.Checkbox('sales', default=True)],
-      [sg.Submit(), sg.Cancel()]]
-window = sg.Window('EC fine prediction program', layout)
-event, values = window.read()
-window.close()
-# create the correct values
-location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10]             # get the data from the values dictionary
-# start the program
-if Kroes == Almunia == Vestager == True:
-    filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
-elif Almunia == Vestager == True:
-    filters = ['Joaquin Almunia', 'Margrethe Vestager']
-elif Kroes == Almunia == True:
-    filters = ['Neelie Kroes', 'Joaquin Almunia']
-elif Kroes == Vestager == True:
-    filters = ['Neelie Kroes', 'Margrethe Vestager']
-elif Kroes == True:
-    filters = ['Neelie Kroes']
-elif Almunia == True:
-    filters = ['Joaquin Almunia']
-elif Vestager == True:
-    filters = ['Margrethe Vestager']
-else:
-    filters = ['Margrethe Vestager']
-sg.theme('Light Blue 1')
-if output_folder[-1] != '/':
-    output_folder = output_folder + '/'
-sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
-# create the model and create the decision tree files
-models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales)  # filter value needs to be value with capital  begin letter (from dataframe)
+def loadLastModel():
+    '''
+    If the object exists load last model
+    '''
+    try:
+        sg.theme('Light Blue 1')
+        layout = [[sg.Text('select the binary file of the model (were you saved it last time: '), sg.InputText(), sg.FileBrowse()]
+        ,[sg.Submit(), sg.Cancel()]]
+        window = sg.Window('Choose previous model from file', layout)
+        event, values = window.read()
+        fileObj = open(values[0], 'rb')
+        models, variable_names, extra_var_year, extra_var_sales = pickle.load(fileObj)
+        fileObj.close()
+        window.close()
+    except:
+        sg.popup_ok("there is no model to load")
+        models, variable_names, extra_var_year, extra_var_sales = NewModelCreation()
+    return models, variable_names, extra_var_year, extra_var_sales
 
+def welcomeScreen():
+    sg.theme('Light Blue 1')
+    layout = [[sg.Text("Welcome to the EC fine prediction application (interpret results with caution)")],
+              [sg.Text("Do you want to load the previous model, or make a new one: ")],
+              [sg.Button('new'), sg.Button('previous model')]]
+    window = sg.Window('EC fine prediction program: welcome', layout)
+    event, values = window.read()
+    window.close()
+    if event == 'new':
+        models, variable_names, extra_var_year, extra_var_sales = NewModelCreation()
+    else:
+        models, variable_names, extra_var_year, extra_var_sales = loadLastModel()
+    return models, variable_names, extra_var_year, extra_var_sales
+# start the first screen
+models, variable_names, extra_var_year, extra_var_sales = welcomeScreen()
 # start screen to predict fines
 def finePredictionScreen():
     '''
@@ -125,10 +167,42 @@ for key, value in models.items():
     layout.append([sg.Text('fine before leniency in percentage for ' + key +' - ' + str(value["fine_before_leniency"][1]))])
     layout.append([sg.Text('fine as nominal amount for ' + key +' with leniency - ' + str(value["total_fine"][1]))])
 layout.append([sg.Text('Do you want to predict a new fine based on the variables of the case? click submit otherwise cancel or leave.')])
+layout.append([sg.Text('If you want to save the current model for later use, check the box: ')])
+layout.append([sg.Checkbox('Save current model', default=False)])
 layout.append([sg.Submit(), sg.Cancel()])
 window = sg.Window('Model has been created', layout)
 event, values = window.read()
 window.close()
+
+def saveModelObject():
+    '''
+    Saves the model
+    '''
+
+    sg.theme('Light Blue 1')
+    layout = [[sg.Text('Give the model a name (name must be given): ')],
+                [sg.InputText()],
+        [sg.Text('Give a location to save the model (as binary): ')],
+        [sg.InputText(), sg.FolderBrowse()],
+        [sg.Submit()]]
+    window = sg.Window('Save model: enter model name', layout)
+    event, values = window.read()
+    model_name = values[0] + '.obj'
+    window.close()
+    full_dir = os.path.join(values[1])
+    if not os.path.exists(full_dir):
+        os.makedirs(full_dir)
+    save_location = os.path.join(values[1],model_name)
+    fileObj = open(save_location, 'wb')
+    save_object = (models, variable_names, extra_var_year, extra_var_sales)
+    pickle.dump(save_object, fileObj)
+    fileObj.close()
+
+# save the model if so asked
+if values[0]:
+    saveModelObject()
+
+
 # start fine predicition screen
 finepredictions = finePredictionScreen()
 # show results and ask to predict a new fine
@@ -149,9 +223,11 @@ while True:
             [sg.Text('Fine before leniency in percentage for ' + key + ' - ' + str(value["fine_before_leniency"][1]))])
         layout.append([sg.Text('Fine as nominal amount for ' + key + ' with leniency - ' + str(value["total_fine"][1]))])
     layout.append([sg.Text('Do you want to predict another new fine based on the variables of the case? click submit (otherwise leave)')])
-    layout.append([sg.Submit()])
+    layout.append([sg.Submit(), sg.Button('Exit')])
     window = sg.Window('EC Fine Prediction Results', layout)
     event, values = window.read()
-    window.close()
+    if event == sg.WIN_CLOSED or event == 'Exit':
+        break
     finepredictions = finePredictionScreen()
+window.close()
 
