@@ -1,5 +1,9 @@
-# script by Bruno Van den Bosch, april 6 2023
-# The following is the user screen for the python translation of the fine prediction model
+# This script is a 'EC cartel fine prediction app':
+# the GUI for the script for translation of the R script used in the paper (note that this translation is not exact)
+# Bruno Van den Bosch and Friso Bostoen, "Opening the Black Box:
+# Uncovering the European Commission’s Cartel Fining Formula through Computational Analysis", Working paper.
+# This script is made for use for practitioners.
+# This script is distributed onder the GNU General Public license
 import os.path
 import PySimpleGUI as sg
 import pandas as pd
@@ -37,30 +41,34 @@ def NewModelCreation():
     window.close()
     # create the correct values
     if event == 'Submit':
-        location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales, max_depth = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10], int(values[11])             # get the data from the values dictionary
-        # start the program
-        if Kroes == Almunia == Vestager == True:
-            filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
-        elif Almunia == Vestager == True:
-            filters = ['Joaquin Almunia', 'Margrethe Vestager']
-        elif Kroes == Almunia == True:
-            filters = ['Neelie Kroes', 'Joaquin Almunia']
-        elif Kroes == Vestager == True:
-            filters = ['Neelie Kroes', 'Margrethe Vestager']
-        elif Kroes == True:
-            filters = ['Neelie Kroes']
-        elif Almunia == True:
-            filters = ['Joaquin Almunia']
-        elif Vestager == True:
-            filters = ['Margrethe Vestager']
-        else:
-            filters = ['Margrethe Vestager']
-        sg.theme('Light Blue 1')
-        sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
-        # create the model and create the decision tree files
-        models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
-
-        return models, variable_names, extra_var_year, extra_var_sales
+        try:
+            location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales, max_depth = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10], int(values[11])             # get the data from the values dictionary
+            # start the program
+            if Kroes == Almunia == Vestager == True:
+                filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
+            elif Almunia == Vestager == True:
+                filters = ['Joaquin Almunia', 'Margrethe Vestager']
+            elif Kroes == Almunia == True:
+                filters = ['Neelie Kroes', 'Joaquin Almunia']
+            elif Kroes == Vestager == True:
+                filters = ['Neelie Kroes', 'Margrethe Vestager']
+            elif Kroes == True:
+                filters = ['Neelie Kroes']
+            elif Almunia == True:
+                filters = ['Joaquin Almunia']
+            elif Vestager == True:
+                filters = ['Margrethe Vestager']
+            else:
+                filters = ['Margrethe Vestager']
+            sg.theme('Light Blue 1')
+            sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
+            # create the model and create the decision tree files
+            models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
+            output_values = (models, variable_names, extra_var_year, extra_var_sales)
+        except:
+            sg.popup_ok('Something went wrong with the entered values.\n Did you leave certain values blank and are all your values valid?')
+            output_values = False
+        return output_values
 
 def loadLastModel():
     '''
@@ -142,39 +150,47 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
     event, values = window.read()
     window.close()
     if event == 'Submit':
-        if values[count+2]:
-            commissioner = 'Margrethe Vestager'
-        elif values[count+3]:
-            commissioner = 'Joaquin Almunia'
-        elif values[count + 3]:
-            commissioner = 'Neelie Kroes'
-        else:
-            commissioner = 'Margrethe Vestager'
-        variables = []
-        for i in range(0, count):
-            variables.append(values[i])
-        input_vars = {}
+        try:
+            if values[count+2]:
+                commissioner = 'Margrethe Vestager'
+            elif values[count+3]:
+                commissioner = 'Joaquin Almunia'
+            elif values[count + 3]:
+                commissioner = 'Neelie Kroes'
+            else:
+                commissioner = 'Margrethe Vestager'
+            variables = []
+            for i in range(0, count):
+                variables.append(values[i])
+            input_vars = {}
 
-        if extra_var_year is False and extra_var_sales is False:
-            i = 0
-            for var_name in variable_names:
-                input_vars[var_name] = [variables[i]]
-                i += 1
-        elif extra_var_year is True and extra_var_sales is True:
-            for i in range(0, count):
-                input_vars[variable_names[i]] = [variables[i]]
-            input_vars["Year"] = [int(values[count + 5])]
-            input_vars["Sales"] = [float(values[count + 4])]
-        elif extra_var_sales is True:
-            for i in range(0, count):
-                input_vars[variable_names[i]] = [variables[i]]
-            input_vars["Sales"] = [float(values[count + 4])]
-        elif extra_var_year is True:
-            for i in range(0, count):
-                input_vars[variable_names[i]] = [variables[i]]
-            input_vars["Year"] = [int(values[count + 5])]
-        variables = pd.DataFrame(input_vars)
-        prediction_fine = predictNewFine(models, commissioner, variables, float(values[count]), float(values[count+1]), sales=float(values[count + 4]))
+            if extra_var_year is False and extra_var_sales is False:
+                i = 0
+                for var_name in variable_names:
+                    input_vars[var_name] = [variables[i]]
+                    i += 1
+            elif extra_var_year is True and extra_var_sales is True:
+                for i in range(0, count):
+                    input_vars[variable_names[i]] = [variables[i]]
+                input_vars["Year"] = [int(values[count + 5])]
+                input_vars["Sales"] = [float(values[count + 4])]
+            elif extra_var_sales is True:
+                for i in range(0, count):
+                    input_vars[variable_names[i]] = [variables[i]]
+                input_vars["Sales"] = [float(values[count + 4])]
+            elif extra_var_year is True:
+                for i in range(0, count):
+                    input_vars[variable_names[i]] = [variables[i]]
+                input_vars["Year"] = [int(values[count + 5])]
+            variables = pd.DataFrame(input_vars)
+            if commissioner in models.keys():
+                prediction_fine = predictNewFine(models, commissioner, variables, float(values[count]), float(values[count+1]), sales=float(values[count + 4]))
+            else:
+                sg.popup_ok('You opted to predict for a Commissioner who is not in the loaded model. \nplease restart program en load the correct model or create a new one')
+                prediction_fine = False
+        except:
+            sg.popup_ok('Something went wrong with entering the variables.\n A common error is  leaving the fill in values blank. These must be filled in for the prediction to occur')
+            prediction_fine = False
     else:
         prediction_fine = False
     return prediction_fine
