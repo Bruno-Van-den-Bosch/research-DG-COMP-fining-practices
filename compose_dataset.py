@@ -342,14 +342,14 @@ def createMainDataFrame(decisions, variables):
     return main_data_frame, main_data_dict
 
 # Part III: predict fines
-def fitModel(dataFrame, variable_names: list or tuple, target: str, test_size=0.15, random_state=None):
+def fitModel(dataFrame, variable_names: list or tuple, target: str, test_size=0.15, random_state=None, max_depth=None):
     '''
     returns the model when given a dataframe and a target to  fit. DataFrame needs to be given as pandas dataframe
     '''
     # create the test train split
     train, test = model_selection.train_test_split(dataFrame, test_size=test_size, random_state=random_state)
     # initiate the model
-    treeModel = tree.DecisionTreeRegressor()
+    treeModel = tree.DecisionTreeRegressor(max_depth=max_depth)
     # create independent variable list
     independents  = train.loc[:, variable_names]
     # create features name list
@@ -371,14 +371,14 @@ def fitModel(dataFrame, variable_names: list or tuple, target: str, test_size=0.
     return treeModel, summary, predictions, feature_names
 
 
-def predictFines(DataFrame, variable_names, test_size=0.15, random_state=1):
+def predictFines(DataFrame, variable_names, test_size=0.15, random_state=1, max_depth=None):
     '''
     Predicts the entire fine and all the interim amounts, returns a dictionary of dictionnary with all necessary data
     '''
     # predict all interim amounts
     all_models = {}
     for amount in ("Base_amount", "Additional_amount", "Aggravating_amount", "Mitigating_amount", "Detterence_amount"):
-        all_models[amount] = fitModel(dataFrame=DataFrame, variable_names=variable_names, target=amount, test_size=test_size, random_state=random_state)
+        all_models[amount] = fitModel(dataFrame=DataFrame, variable_names=variable_names, target=amount, test_size=test_size, random_state=random_state, max_depth=max_depth)
     # predict complete fines
     # create the same test_train split as in the models:
     train, test = model_selection.train_test_split(DataFrame, test_size=test_size, random_state=random_state)
@@ -428,7 +428,8 @@ def showDecisionTree(models, commissioner, target, file_location=""):
 def predictions(location_data: str, main_folder:str, location_variable:str, name='variable_name', regex='regex', party='party', add_before='add_before',
                 exclusion_check='exclusion_check', distance_party='distance_party', decision_name='decision_name', case_number='case_number', year='year', party_name='party_name', commissioner='commissioner', nominal_fine='nominal_fine',
                base_amount='base_amount', additional_amount='additional_amount', duration='duration', mitigating_amount='mitigating_amount', aggravating_amount='aggravating_amount',
-               detterence_amount='detterence_amount', decreases_after_fine='decreases_after_fine', ability_to_pay='ability_to_pay', filter_value="Commissioner" ,filter_on=(['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']), random_state=12, test_size=0.10, file_output_folder="", extra_var_year=True, extra_var_sales=True):  # filter value needs to be value with capital  begin letter (from dataframe)
+               detterence_amount='detterence_amount', decreases_after_fine='decreases_after_fine', ability_to_pay='ability_to_pay', filter_value="Commissioner" ,filter_on=(['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']), random_state=12,
+                test_size=0.10, file_output_folder="", extra_var_year=True, extra_var_sales=True, max_depth=None):  # filter value needs to be value with capital  begin letter (from dataframe)
     '''
     container function to do the actual predictions
     '''
@@ -447,7 +448,7 @@ def predictions(location_data: str, main_folder:str, location_variable:str, name
         print("this is the filter value: " + commis)
         data_filtered = main_data_frame[main_data_frame[filter_value] == commis]
         print('the number of filtered fines are: ' + str(len(data_filtered.index)))
-        models[commis] = predictFines(data_filtered, variable_names, test_size=test_size, random_state=random_state)
+        models[commis] = predictFines(data_filtered, variable_names, test_size=test_size, random_state=random_state, max_depth=max_depth)
         for key, value in models[commis].items():
             print("The model predicts the following value: ")
             print(key)
