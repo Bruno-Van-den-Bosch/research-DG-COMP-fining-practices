@@ -1,10 +1,11 @@
-# script by Bruno Van den Bosch, 6 april 2023
+# Script by Bruno Van den Bosch, 6 April 2023
 # The following is the user screen for the python translation of the fine prediction model
 import os.path
+
 import PySimpleGUI as sg
 import pandas as pd
 import pickle
-from compose_dataset import predictions, predictNewFine
+from compose_dataset import predictions, predictNewFine, showDecisionTree
 
 def NewModelCreation():
     '''
@@ -77,6 +78,20 @@ def loadLastModel():
             first_return = pickle.load(fileObj)  #  models, variable_names, extra_var_year, extra_var_sales
             fileObj.close()
             window.close()
+            # ask where to save the decision trees
+            sg.theme('Light Blue 1')
+            layout = [[sg.Text("Select the location to save the decision trees, otherwise just hit 'do not save': "), sg.InputText(),
+                       sg.FolderBrowse()]
+                , [sg.Submit(), sg.Button("do not save")]]
+            window = sg.Window('Choose previous model from file', layout)
+            event, values = window.read()
+            window.close()
+            # save all trees if asked
+            if event == 'Submit':
+                for commis, value in first_return[0].items():
+                    for key, value in first_return[0][commis].items():
+                        if key not in ("fine_before_leniency", "fine_perc_final", "total_fine", 'Duration'):
+                            showDecisionTree(first_return[0], commis, key, file_location=values[0])
         else:
             first_return = False
     except:
@@ -194,6 +209,7 @@ def saveModelObject(models, variable_names, extra_var_year, extra_var_sales):
         out = True
     else:
         out = False
+    return out
 
 
 # ask user if they want to predict a new case
