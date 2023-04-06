@@ -13,6 +13,7 @@ import os
 
 
 
+
 # Part I: create dataframe with all relevant fines and interim amounts of said fine, extracted from given fining decisons
 # Dataframe also needs to have all relevent parties linked to each amount
 
@@ -416,7 +417,8 @@ def showDecisionTree(models, commissioner, target, file_location=""):
     prints the relevant decision tree
     '''
     fig = tree.export_text(models[commissioner][target][0], feature_names=models[commissioner][target][3])
-    with open(file_location+"decision_tree_"+target+'_commissioner_'+commissioner+'.log', 'w') as document:
+    filename = "decision_tree_"+target+'_commissioner_'+commissioner+'.log'
+    with open(os.path.join(file_location, filename), 'w') as document:
         document.write(fig)
         document.write("\nThe summary statistics for this model on "+ target +" by Commissioner "+commissioner +" is\n")
         for key, value in models[commissioner][target][1].items():
