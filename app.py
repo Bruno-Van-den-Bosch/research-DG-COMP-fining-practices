@@ -1,7 +1,6 @@
-# Script by Bruno Van den Bosch, 6 April 2023
+# script by Bruno Van den Bosch, april 6 2023
 # The following is the user screen for the python translation of the fine prediction model
 import os.path
-
 import PySimpleGUI as sg
 import pandas as pd
 import pickle
@@ -10,7 +9,6 @@ from compose_dataset import predictions, predictNewFine, showDecisionTree
 def NewModelCreation():
     '''
     GUI for new model creation
-    :return:
     '''
     # start opening window for file selection
     sg.theme('Light Blue 1')
@@ -23,21 +21,23 @@ def NewModelCreation():
               [sg.InputText(), sg.FolderBrowse()],
           [sg.Text("Which Commissioners are in the dataset")],
               [sg.Checkbox('Neelie Kroes', default=True), sg.Checkbox('Joaquin Almunia', default=True), sg.Checkbox('Margrethe Vestager', default=True)],
-        [sg.Text("what test set size (in float, e.g. 0.10)")],
-              [sg.InputText()],
+        [sg.Text("what test set size (in float, e.g. 0.15)")],
+              [sg.InputText(default_text=0.15)],
         [sg.Text("Enter the random integer for the random state")],
-              [sg.InputText()],
+              [sg.InputText(default_text=12)],
         [sg.Text("Folder to put resulting decision trees into: ")],
         [sg.InputText(), sg.FolderBrowse()],
         [sg.Text("Use the following also as variable")],
               [sg.Checkbox('year of decision', default=True), sg.Checkbox('sales', default=True)],
+        [sg.Text("What maximum depth for the decision tree: ")],
+              [sg.InputText(default_text=6)],
           [sg.Submit(), sg.Cancel()]]
     window = sg.Window('EC fine prediction program: new model', layout)
     event, values = window.read()
     window.close()
     # create the correct values
     if event == 'Submit':
-        location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10]             # get the data from the values dictionary
+        location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales, max_depth = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10], int(values[11])             # get the data from the values dictionary
         # start the program
         if Kroes == Almunia == Vestager == True:
             filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
@@ -56,11 +56,10 @@ def NewModelCreation():
         else:
             filters = ['Margrethe Vestager']
         sg.theme('Light Blue 1')
-        if output_folder[-1] != '/':
-            output_folder = output_folder + '/'
         sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
         # create the model and create the decision tree files
-        models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales)  # filter value needs to be value with capital  begin letter (from dataframe)
+        models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
+
         return models, variable_names, extra_var_year, extra_var_sales
 
 def loadLastModel():
@@ -102,14 +101,18 @@ def loadLastModel():
 def welcomeScreen():
     sg.theme('Light Blue 1')
     layout = [[sg.Text("Welcome to the EC fine prediction application (interpret results with caution)")],
-              [sg.Text("Do you want to load the previous model, or make a new one: ")],
-              [sg.Button('new'), sg.Button('previous model')]]
+              [sg.Text("Do you want to load an existing model, or make a new one: ")],
+              [sg.Button('new'), sg.Button('existing model')]]
     window = sg.Window('EC fine prediction program: welcome', layout)
     event, values = window.read()
     window.close()
     if event == 'new':
-        first_return = NewModelCreation()  #models, variable_names, extra_var_year, extra_var_sales
-    elif event == 'previous model':
+        try:
+            first_return = NewModelCreation()  #models, variable_names, extra_var_year, extra_var_sales
+        except:
+            sg.popup_ok('The model could not be created.\nA common error is leaving Commissioners checked when they do not feature in the dataset, or not using the correct template.\nPlease relaunch program.')
+            first_return = False
+    elif event == 'existing model':
         first_return = loadLastModel()
     else:
         first_return = False
@@ -123,16 +126,17 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
     sg.theme('Light Blue 1')
     layout = [[sg.Text('please select the variables of the fine to predict')]]
     count = 0
-    for name in variable_names[:-2]:
-        layout.append([sg.Checkbox(name, default=False)])
-        count += 1
-    layout.append([sg.Text("duration: "), sg.InputText()])
-    layout.append([sg.Text("post fine reduction e.g. leniency: "), sg.InputText()])
+    for name in variable_names:
+        if name not in ('Year', 'Sales'):
+            layout.append([sg.Checkbox(name, default=False)])
+            count += 1
+    layout.append([sg.Text("duration (in years, float accepted): "), sg.InputText(default_text=1)])
+    layout.append([sg.Text("post fine reduction e.g. leniency: "), sg.InputText(default_text=0)])
     layout.append([sg.Checkbox('EC Vestager', default=False)])
     layout.append([sg.Checkbox('EC Almunia', default=False)])
     layout.append([sg.Checkbox('EC Kroes', default=False)])
-    layout.append([sg.Text("sales: "), sg.InputText()])
-    layout.append([sg.Text("case year: "), sg.InputText()])
+    layout.append([sg.Text("sales: "), sg.InputText(default_text=10000)])
+    layout.append([sg.Text("case year: "), sg.InputText(default_text=2023)])
     layout.append([sg.Submit(), sg.Cancel()])
     window = sg.Window('New case prediction selection', layout)
     event, values = window.read()
@@ -151,30 +155,24 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
             variables.append(values[i])
         input_vars = {}
 
-        if extra_var_year == extra_var_sales == False:
+        if extra_var_year is False and extra_var_sales is False:
             i = 0
             for var_name in variable_names:
                 input_vars[var_name] = [variables[i]]
                 i += 1
-        elif extra_var_sales == False:
-            i = 0
-            for var_name in variable_names[:-1]:
-                input_vars[var_name] = [variables[i]]
-                i += 1
-            input_vars["Sales"] = [float(values[count + 4])]
-        elif extra_var_year == False:
-            i = 0
-            for var_name in variable_names[:-1]:
-                input_vars[var_name] = [variables[i]]
-                i += 1
-            input_vars["Year"] = [int(values[count + 5])]
-        else:
-            i = 0
-            for var_name in variable_names[:-2]:
-                input_vars[var_name] = [variables[i]]
-                i += 1
+        elif extra_var_year is True and extra_var_sales is True:
+            for i in range(0, count):
+                input_vars[variable_names[i]] = [variables[i]]
             input_vars["Year"] = [int(values[count + 5])]
             input_vars["Sales"] = [float(values[count + 4])]
+        elif extra_var_sales is True:
+            for i in range(0, count):
+                input_vars[variable_names[i]] = [variables[i]]
+            input_vars["Sales"] = [float(values[count + 4])]
+        elif extra_var_year is True:
+            for i in range(0, count):
+                input_vars[variable_names[i]] = [variables[i]]
+            input_vars["Year"] = [int(values[count + 5])]
         variables = pd.DataFrame(input_vars)
         prediction_fine = predictNewFine(models, commissioner, variables, float(values[count]), float(values[count+1]), sales=float(values[count + 4]))
     else:
@@ -189,7 +187,7 @@ def saveModelObject(models, variable_names, extra_var_year, extra_var_sales):
 
     sg.theme('Light Blue 1')
     layout = [[sg.Text('Give the model a name (name must be given): ')],
-                [sg.InputText()],
+                [sg.InputText(default_text="My_new_model")],
         [sg.Text('Give a location to save the model (as binary): ')],
         [sg.InputText(), sg.FolderBrowse()],
         [sg.Submit()]]
@@ -224,11 +222,11 @@ def modelLoadedScreen(models):
     layout.append([sg.Text('Do you want to predict a new fine based on the variables of the case? click submit otherwise cancel or leave.')])
     layout.append([sg.Text('If you want to save the current model for later use, check the box: ')])
     layout.append([sg.Checkbox('Save current model', default=False)])
-    layout.append([sg.Submit(), sg.Cancel()])
+    layout.append([sg.Button('Predict case'), sg.Exit()])
     window = sg.Window('Model has been created', layout)
     event, values = window.read()
     window.close()
-    next_step = bool(event == 'Submit')
+    next_step = bool(event == 'Predict case')
     # save the model if so asked
     if values[0]:
         next_step = saveModelObject(models, variable_names, extra_var_year, extra_var_sales)
