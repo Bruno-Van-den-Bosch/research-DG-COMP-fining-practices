@@ -43,7 +43,11 @@ To  use the application the following dependencies need to be installed:
 - re
 - pypdf
 - sklearn
+- scikit-learn
+- openpyxl
 - os
+
+This  can be done through 'pip install 'dependencies_name''.
 
 Next, the app.py app needs to be launched (in terminal (app.py and compose-dataset need to be in the same folder): python3 'app.py'). When launched the app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
 
@@ -53,7 +57,11 @@ Lastly, new cases can be predicted. After hitting submit a selection menu will o
 
 The app will show the predictions based on the trained model and ask whether a new fine needs to be predicted. To close the app, close the window, then close the selection menu. This is a known issue, yet the program will have stopped.
 
-This app.py script can be made into an application using the standard methods (e.g. pyinstaller)
+This app.py script can be made into an application using the standard methods (e.g. pyinstaller: user manual - https://pyinstaller.org/en/stable/). Make sure all dependencies are installed. This can be checked by launching the .py file in terminal, running through the app and check terminal if any missing module errors are given.
+
+final remarks: the run time can be considerable with very large datasets. To reduce wait time, run the script per Commissioner. This can be done by copying the template file, deleting the other EC's fines and only leaving the box for the relevant Commissioner checked. 
+
+When predicting new cases, if multple Commissioners are checked, only the fine according to the most recent Commissioner is predicted.
 
 ## Using the ANNEX script
 
