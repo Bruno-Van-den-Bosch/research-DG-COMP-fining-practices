@@ -34,7 +34,11 @@ The files are:
 
 8. template_variables.xlsx: this template contains all current variables with the relevant regex expressions. This template needs to be fed to  the application (through the GUI). This template can be extended or changed, yet top row needs to stay the same. 
 
-9. Complete_cartel_model_saved.obj: this is the saved object created out of the template files and all the relevant EC decisions. This obj can be loaded into the app and used to predict fines. The decision trees can also be saved to a folder of the users choosing. 
+9. pre_made_py_models folder: this folder contains saved objects created out of the template files and all the relevant EC decisions. These files can be loaded into the app and used to predict fines. The decision trees can also be saved to a folder after loading the model. Be warned: These models are all made using the template files but differ in settings (indicated in their titles). This means their accuracy is different. For example the unlimited depth model has a R2 of 1. in the training set but a bad score on the test sets. The models with fewer depth (meaning less decision tree levels) are more accurate on the test sets since there is fewer overfitting. the file titles (and settings) are:
+  - model_depth_4_seed_21_test_005.obj
+  - model_depth_4_seed_21_test_015.obj
+  - model_depth_6_seed_12_test_005.obj
+  - model_depth_6_seed_12_test_015.obj
 
 ## Using the application
 
