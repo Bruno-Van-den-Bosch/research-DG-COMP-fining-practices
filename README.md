@@ -53,15 +53,22 @@ To  use the application the following dependencies need to be installed:
 - openpyxl
 - os
 
-This  can be done through 'pip install 'dependencies_name''.
+This  can be done through in terminal, linux: 'pip install 'dependencies_name' or windows (in cmd): py -m pip install 'dependencies_name'. Of course python needs to be installed already.
 
-Next, the app.py app needs to be launched (in terminal (app.py and compose-dataset need to be in the same folder): python3 'app.py'). When launched the app will give the choice between creating a new model or load an existing one.
+This app.py script can be made into an application using the standard methods (e.g. pyinstaller: user manual - https://pyinstaller.org/en/stable/). Make sure all dependencies are installed. This can be checked by launching the .py file in terminal, running through the app and check terminal if any missing module errors are given. On linux the exe can be created by going to the directory of the application (cd 'file path') in terminal, then entering ' pyinstaller --onefile app.py ' (exclude '' ). You will find the application in the newly created 'dist' folder at the folder location. In windows also change directory to that of the app.py and compose_dataset.py script, then run ' py -m PyInstaller --onefile --windowed app.py ' (exclude '' ). The application will also be found in the newly created dist folder.
+
+DISCLAIMER: this information is given only as a guide, please use other resources especially the pyinstaller manual when encountering problems
+
+When not creating an exe program with pyinstaller, the app.py app needs to be launched (in terminal: python3 'app.py')(app.py and compose-dataset need to be in the same folder). When launched the app will give the choice between creating a new model or load an existing one.
+
 
 #### new model:
 
 The app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), on which value the data needs to be filtered into groups (make sure enough fines are in each group. If only one group, e.g. one commissioner, just filter on that label, in e.g. this  would be Commissioner), a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
 
 After hitting submit, the script will start running and a message will be displayed while the script runs. Be aware that large dataset will take considerable time. Next, the relevant files will be saved in the given location and the summary statistics will be given. The summary statistic per interim amount can be found below the decision tree.
+
+final remarks: the run time can be considerable with very large datasets. To reduce wait time, run the script per Commissioner or group. This can be done by copying the template file, deleting the other EC's fines and only leaving the box for the relevant Commissioner checked. Limiting depth can often reduce over fitting. Run multiple models with different seeds and depth to fine tune the best decision tree and prediction model.
 
 #### loading existing model:
 
@@ -73,15 +80,15 @@ Lastly, new cases can be predicted. After hitting submit a selection menu will o
 
 The app will show the predictions based on the trained model and ask whether a new fine needs to be predicted. To close the app, close the window, then close the selection menu. This is a known issue, yet the program will have stopped.
 
-This app.py script can be made into an application using the standard methods (e.g. pyinstaller: user manual - https://pyinstaller.org/en/stable/). Make sure all dependencies are installed. This can be checked by launching the .py file in terminal, running through the app and check terminal if any missing module errors are given.
-
-final remarks: the run time can be considerable with very large datasets. To reduce wait time, run the script per Commissioner or group. This can be done by copying the template file, deleting the other EC's fines and only leaving the box for the relevant Commissioner checked. 
-
 When predicting new cases, if multple groups are checked, only the fine according to the last first checked value is predicted. If none is checked, the last group is checked by default.
+
+DISCLAIMER: these predictions are only as good as the model and is no substitute for a legal analysis. The predictions can thus not be relied on as legal advice. The model and app are made with academic intent. The application is meant as a tool for practitioners to be interpreted at their discretion.
 
 ### updating the Templates
 
-The rows of the templated can be modified as long as the follow template is followed (do not change the top row). This means new variables can be added, variable regex patterns can be changed, new training fines can be added, new commissioners can be added etc.
+The rows of the templated can be modified and extended as long as the follow template is followed (do not change the top row). This means new variables can be added, variable regex patterns can be changed, new training fines can be added, new commissioners can be added etc.
+
+The open_category column title as all other titles need to remain exactly the same. However this column can be filled in with categories of the users choosing. fill in 'open_category' in the filter input on the model creation screen to group according to the categories. Make sure enough cases exist for each category. If an error is given, try reducing the testset. However, testset cannot be zero!
 
 ## Using the ANNEX script
 
@@ -109,8 +116,10 @@ To model new fines:
 
 ## License
 
-Since this code was made for academic purposes, the code is distributed under the GNU General Public license (as found here). Users (generally) thus have the right to Run, Study, Share, and Modify the code.
+Since this code was made for academic purposes, the code is distributed under the GNU General Public license (as found here). Users (generally) thus have the right to Run, Study, Share, and Modify the code. The application and model are given as is and are no substitute for a thorough legal analysis.
 
 ## Questions and problems
 
-This repository is used for the transparancy of the research. Issues can be raised yet the main branch will generally not be updated since we already analysed the results. Researchers are free to branch this project and adapt to their needs, in accordance with the license. 
+The main repository is used for the transparancy of the research. Issues can be raised yet the main branch will generally not be updated since we already analysed the results. Researchers are free to branch this project and adapt to their needs, in accordance with the license. 
+
+This repository branch is explicitly open for comments, feedback and adaptations in according with the license. General github practices apply.
