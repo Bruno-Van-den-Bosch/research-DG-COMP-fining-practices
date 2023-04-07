@@ -426,10 +426,17 @@ def showDecisionTree(models, commissioner, target, file_location=""):
             document.write(key+" is :"+ str(value)+"\n")
 
 
+def determineFilterValues(main_data_frame, filter_value):
+    '''
+    Determines filter values for a given target
+    '''
+    filter_on = main_data_frame[filter_value].unique().tolist()
+    return filter_on
+
 def predictions(location_data: str, main_folder:str, location_variable:str, name='variable_name', regex='regex', party='party', add_before='add_before',
                 exclusion_check='exclusion_check', distance_party='distance_party', decision_name='decision_name', case_number='case_number', year='year', party_name='party_name', commissioner='commissioner', nominal_fine='nominal_fine',
                base_amount='base_amount', additional_amount='additional_amount', duration='duration', mitigating_amount='mitigating_amount', aggravating_amount='aggravating_amount',
-               detterence_amount='detterence_amount', decreases_after_fine='decreases_after_fine', ability_to_pay='ability_to_pay', filter_value="Commissioner" ,filter_on=(['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']), random_state=12,
+               detterence_amount='detterence_amount', decreases_after_fine='decreases_after_fine', ability_to_pay='ability_to_pay', filter_value="Commissioner", random_state=12,
                 test_size=0.10, file_output_folder="", extra_var_year=True, extra_var_sales=True, max_depth=None):  # filter value needs to be value with capital  begin letter (from dataframe)
     '''
     container function to do the actual predictions
@@ -445,20 +452,20 @@ def predictions(location_data: str, main_folder:str, location_variable:str, name
         variable_names.append('Sales')
     # filter per commissioner
     models = {}
+    filter_on = determineFilterValues(main_data_frame, filter_value)
     for commis in filter_on:
-        print("this is the filter value: " + commis)
+        print("this is the filter value: " + str(commis))
         data_filtered = main_data_frame[main_data_frame[filter_value] == commis]
         print('the number of filtered fines are: ' + str(len(data_filtered.index)))
-        models[commis] = predictFines(data_filtered, variable_names, test_size=test_size, random_state=random_state, max_depth=max_depth)
-        for key, value in models[commis].items():
+        models[str(commis)] = predictFines(data_filtered, variable_names, test_size=test_size, random_state=random_state, max_depth=max_depth)
+        for key, value in models[str(commis)].items():
             print("The model predicts the following value: ")
             print(key)
             print("The model has following characteristics")
             print(value)
             if key not in ("fine_before_leniency", "fine_perc_final", "total_fine", 'Duration'):
-                showDecisionTree(models, commis, key, file_location=file_output_folder)
+                showDecisionTree(models, str(commis), key, file_location=file_output_folder)
     return models, variable_names
-
 
 def predictNewFine(models, commissioner, variables, duration, post_fine_reductions, sales=1):  # sales and years are in the variable list
     '''
