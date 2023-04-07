@@ -23,7 +23,7 @@ def NewModelCreation():
               [sg.InputText(), sg.FileBrowse()],
         [sg.Text("Folder EC Decisions (file name as: '[case number] [name].pdf', e.g. '123456 cartel.pdf' ")],
               [sg.InputText(), sg.FolderBrowse()],
-          [sg.Text("Filter dataset on (one option): ")],
+          [sg.Text("Filter dataset on (one option) WARNING enough cases need to be in each group: ")],
               [sg.Checkbox('Commissioner', default=True), sg.Checkbox('Year', default=False),sg.Text('Variable name: '),sg.InputText()],
         [sg.Text("what test set size (in float, e.g. 0.15)")],
               [sg.InputText(default_text=0.15)],
@@ -59,7 +59,7 @@ def NewModelCreation():
             models, variable_names = predictions(location_data, main_folder, location_variable, filter_value=filter_value, test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
             output_values = (models, variable_names, extra_var_year, extra_var_sales)
         except:
-            sg.popup_ok('Something went wrong with the entered values.\n Did you leave certain values blank and are all your values valid?')
+            sg.popup_ok('Something went wrong with the entered values.\n Did you leave certain values blank and are all your values valid?\n Or, not enough cases featured in each group')
             output_values = False
         return output_values
 
@@ -69,7 +69,7 @@ def loadLastModel():
     '''
     try:
         sg.theme('Light Blue 1')
-        layout = [[sg.Text('select the binary file of the model (were you saved it last time: '), sg.InputText(), sg.FileBrowse()]
+        layout = [[sg.Text('select the binary file of the model (.obj extension): '), sg.InputText(), sg.FileBrowse()]
         ,[sg.Submit(), sg.Cancel()]]
         window = sg.Window('Choose previous model from file', layout)
         event, values = window.read()
@@ -177,7 +177,7 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
                 input_vars["Year"] = [int(values[count + 4])]
             variables = pd.DataFrame(input_vars)
             if commissioner in models.keys():
-                prediction_fine = predictNewFine(models, commissioner, variables, float(values[count]), float(values[count+1]), sales=float(values[count + 4]))
+                prediction_fine = predictNewFine(models, commissioner, variables, float(values[count+1]), float(values[count+2]), sales=float(values[count + 3]))
             else:
                 sg.popup_ok('You opted to predict for a group which is not in the loaded model. \nplease restart program en load the correct model or create a new one')
                 prediction_fine = False
@@ -262,6 +262,7 @@ def casePredictionsLoop(models, variable_names, extra_var_year, extra_var_sales)
                       [sg.Text('Detterence amount: ' + str(finepredictions[4]))],
                       [sg.Text('Amount before leniency and exceptional reductions (percentage): '+ str(finepredictions[5]))],
                       [sg.Text('Total fine (percentage) amount with additional decreases: ' + str(finepredictions[6]))],
+                      [sg.Text('Total fine (nominally) with additional decreases: ' + str(finepredictions[7]))],
                       [sg.Text('These predictions are only as good as the model, please interpret with caution')],
                         [sg.Text('The models accuracy on the fines from the dataset is currently: ')]]
             for key, value in models.items():
