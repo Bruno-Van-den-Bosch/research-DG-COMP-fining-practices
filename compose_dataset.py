@@ -10,6 +10,7 @@ import pandas as pd
 import sklearn
 from sklearn import model_selection
 from sklearn import tree
+from sklearn.metrics import r2_score
 import os
 
 
@@ -63,6 +64,7 @@ class Party:  # party to contain all relevant info to be used to predict
         self.fine_perc_final = float
         self.sales = float
         self.commissioner = str
+        self.open_category = str
         # variables which are created by the model
         self.coded_variables = {}  # structure is "variable_name:bool"
 
@@ -89,7 +91,7 @@ class Party:  # party to contain all relevant info to be used to predict
 
     def createParty(self, name,  nominal_fine, base_amount, additional_amount, duration, \
                     mitigating_amount, aggravating_amount, \
-                    detterence_amount, decreases_after_fine, ability_to_pay, commissioner):
+                    detterence_amount, decreases_after_fine, ability_to_pay, commissioner, open_category="same"):
         '''
         fills in all the necessary steps of the object
         '''
@@ -105,6 +107,7 @@ class Party:  # party to contain all relevant info to be used to predict
         self.decreases_after_fine = float(decreases_after_fine)  # most common would be the Leniency decrease
         self.ability_to_pay = float(ability_to_pay)
         self.commissioner = commissioner
+        self.open_category = open_category
         # calculate the other amounts
         self.calculateSales()
 
@@ -120,6 +123,7 @@ class Decision:
         self.parties = {} # format as: "party name:party()"
         self.decision_text = str
         self.year = float
+        self.sector = str
 
 
 # create the used functions
@@ -169,7 +173,7 @@ def identifyAmounts(decision_text, parties, interim=True):
 # If  a dataframe exists, read dataframe into all classes
 def readInData(location: str, decision_name=None, case_number=None, party_name=None, commissioner=None, nominal_fine=None,
                base_amount=None, additional_amount=None, duration=None, mitigating_amount=None, aggravating_amount=None,
-               detterence_amount=None, decreases_after_fine=None, ability_to_pay=None, year=None):
+               detterence_amount=None, decreases_after_fine=None, ability_to_pay=None, year=None, open_category=None, sector=None):
     '''
     Reads in the data from an excel file location. The optional paramater are used to indicate what the titles of the relevant colums are
     '''
@@ -182,7 +186,7 @@ def readInData(location: str, decision_name=None, case_number=None, party_name=N
         #create party per fine
         party = Party()
         party.createParty(row[party_name], row[nominal_fine], row[base_amount], row[additional_amount], row[duration],
-                          row[mitigating_amount], row[aggravating_amount], row[detterence_amount], row[decreases_after_fine], row[ability_to_pay], row[commissioner])
+                          row[mitigating_amount], row[aggravating_amount], row[detterence_amount], row[decreases_after_fine], row[ability_to_pay], row[commissioner], row[open_category])
         print("Party has been added: " + row[party_name])
         # check if decision already exists, otherwise create
         try:
@@ -194,6 +198,7 @@ def readInData(location: str, decision_name=None, case_number=None, party_name=N
             decisions[row[decision_name]].decision_name = row[decision_name]
             decisions[row[decision_name]].case_number = row[case_number]
             decisions[row[decision_name]].year = row[year]
+            decisions[row[decision_name]].sector = row[sector]
             case_number_converter[str(row[case_number])] = row[decision_name]
             decisions[row[decision_name]].parties[row[party_name]] = party
             print("Party has been added: " + decisions[row[decision_name]].parties[row[party_name]].name)
@@ -315,13 +320,17 @@ def createMainDataFrame(decisions, variables):
     main_data_dict["Nominal_fine"] = []
     main_data_dict["Commissioner"] = []
     main_data_dict["Year"] = []
+    main_data_dict["Sector"] = []
+    main_data_dict["open_category"] = []
     for decision in decisions.values():
         for party in decision.parties.values():
             # add all the prefilled data
             main_data_dict["Decision_name"].append(decision.decision_name)
             main_data_dict["Case_number"].append(decision.case_number)
             main_data_dict["Year"].append(int(decision.year))
+            main_data_dict["Sector"].append(decision.sector)
             main_data_dict["Party"].append(party.name)
+            main_data_dict["open_category"].append(party.open_category)
             main_data_dict["Base_amount"].append(float(party.base_amount))
             main_data_dict["Duration"].append(float(party.duration))
             main_data_dict["Additional_amount"].append(float(party.additional_amount))
@@ -399,15 +408,15 @@ def predictFines(DataFrame, variable_names, test_size=0.15, random_state=1, max_
     all_models["total_fine"] = [None, None, all_models["fine_perc_final"][2] * test.loc[:, "Sales"], all_models["Base_amount"][3]]
     # resolve R2
     try:
-        all_models["fine_before_leniency"][1] = sklearn.metrics.r2_score(test.loc[:, "Fine_before_Leniency"], all_models["fine_before_leniency"][2])
+        all_models["fine_before_leniency"][1] = r2_score(test.loc[:, "Fine_before_Leniency"], all_models["fine_before_leniency"][2])
     except:
         all_models["fine_before_leniency"][1] = "try other seed"
     try:
-        all_models["fine_perc_final"][1] = sklearn.metrics.r2_score(test.loc[:, "Total_fine_percentage"], all_models["fine_perc_final"][2])
+        all_models["fine_perc_final"][1] = r2_score(test.loc[:, "Total_fine_percentage"], all_models["fine_perc_final"][2])
     except:
         all_models["fine_perc_final"][1] = "try other seed"
     try:
-        all_models["total_fine"][1] = sklearn.metrics.r2_score(test.loc[:, "Nominal_fine"], all_models["total_fine"][2])
+        all_models["total_fine"][1] = r2_score(test.loc[:, "Nominal_fine"], all_models["total_fine"][2])
     except:
         all_models["total_fine"][1] = "try other seed"
     # return results
@@ -437,11 +446,11 @@ def predictions(location_data: str, main_folder:str, location_variable:str, name
                 exclusion_check='exclusion_check', distance_party='distance_party', decision_name='decision_name', case_number='case_number', year='year', party_name='party_name', commissioner='commissioner', nominal_fine='nominal_fine',
                base_amount='base_amount', additional_amount='additional_amount', duration='duration', mitigating_amount='mitigating_amount', aggravating_amount='aggravating_amount',
                detterence_amount='detterence_amount', decreases_after_fine='decreases_after_fine', ability_to_pay='ability_to_pay', filter_value="Commissioner", random_state=12,
-                test_size=0.10, file_output_folder="", extra_var_year=True, extra_var_sales=True, max_depth=None):  # filter value needs to be value with capital  begin letter (from dataframe)
+                test_size=0.10, file_output_folder="", open_category='open_category', sector='sector', extra_var_year=True, extra_var_sales=True, max_depth=None):  # filter value needs to be value with capital  begin letter (from dataframe)
     '''
     container function to do the actual predictions
     '''
-    decisions, case_number_converter = readInData(location_data,decision_name=decision_name,case_number=case_number, year=year, party_name=party_name,commissioner=commissioner,nominal_fine=nominal_fine,base_amount=base_amount,additional_amount=additional_amount,duration=duration,mitigating_amount=mitigating_amount,aggravating_amount=aggravating_amount,detterence_amount=detterence_amount,decreases_after_fine=decreases_after_fine,ability_to_pay=ability_to_pay)
+    decisions, case_number_converter = readInData(location_data,decision_name=decision_name,case_number=case_number, year=year, party_name=party_name,commissioner=commissioner,nominal_fine=nominal_fine,base_amount=base_amount,additional_amount=additional_amount,duration=duration,mitigating_amount=mitigating_amount,aggravating_amount=aggravating_amount,detterence_amount=detterence_amount,decreases_after_fine=decreases_after_fine,ability_to_pay=ability_to_pay, open_category=open_category, sector=sector)
     addDecisionText(decisions, case_number_converter, main_folder=main_folder)
     variables, variable_names = readVariables(location_variable, name=name, regex=regex, party=party, add_before=add_before, exclusion_check=exclusion_check, distance_party=distance_party)
     main_data_frame, main_data_dict = createMainDataFrame(decisions, variables)
@@ -470,16 +479,13 @@ def predictions(location_data: str, main_folder:str, location_variable:str, name
 def predictNewFine(models, commissioner, variables, duration, post_fine_reductions, sales=1):  # sales and years are in the variable list
     '''
     predicts the fines in the correct format
-    :param models:
-    :param location_predict:
-    :return:
     '''
     fine = Party()
-    fine.base_amount = models[commissioner]["Base_amount"][0].predict(variables)
-    fine.additional_amount = models[commissioner]["Additional_amount"][0].predict(variables)
-    fine.aggravating_amount = models[commissioner]["Aggravating_amount"][0].predict(variables)
-    fine.mitigating_amount = models[commissioner]["Mitigating_amount"][0].predict(variables)
-    fine.detterence_amount = models[commissioner]["Detterence_amount"][0].predict(variables)
+    fine.base_amount = models[commissioner]["Base_amount"][0].predict(variables).tolist()[0] # addded .tolist()[0]
+    fine.additional_amount = models[commissioner]["Additional_amount"][0].predict(variables).tolist()[0] # addded .tolist()[0]
+    fine.aggravating_amount = models[commissioner]["Aggravating_amount"][0].predict(variables).tolist()[0] # addded .tolist()[0]
+    fine.mitigating_amount = models[commissioner]["Mitigating_amount"][0].predict(variables).tolist()[0] # addded .tolist()[0]
+    fine.detterence_amount = models[commissioner]["Detterence_amount"][0].predict(variables).tolist()[0] # addded .tolist()[0]
     fine.decreases_after_fine = post_fine_reductions
     fine.duration = duration
     fine.calculateFinePercentage()
