@@ -59,7 +59,7 @@ Next, the app.py app needs to be launched (in terminal (app.py and compose-datas
 
 #### new model:
 
-The app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), which commissioners feature in the dataset, a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
+The app will ask for the location of the template excels, the location of the relevant fining decisions (in the same format as below, meaning '[case number] [name].pdf', e.g. '12345 cartel.pdf'), on which value the data needs to be filtered into groups (make sure enough fines are in each group. If only one group, e.g. one commissioner, just filter on that label, in e.g. this  would be Commissioner), a location to save the resulting decision trees, a seed to ensure reproducibility, the largeness of the test set, and whether to include sales and/or the decision year as a variable.
 
 After hitting submit, the script will start running and a message will be displayed while the script runs. Be aware that large dataset will take considerable time. Next, the relevant files will be saved in the given location and the summary statistics will be given. The summary statistic per interim amount can be found below the decision tree.
 
@@ -75,9 +75,13 @@ The app will show the predictions based on the trained model and ask whether a n
 
 This app.py script can be made into an application using the standard methods (e.g. pyinstaller: user manual - https://pyinstaller.org/en/stable/). Make sure all dependencies are installed. This can be checked by launching the .py file in terminal, running through the app and check terminal if any missing module errors are given.
 
-final remarks: the run time can be considerable with very large datasets. To reduce wait time, run the script per Commissioner. This can be done by copying the template file, deleting the other EC's fines and only leaving the box for the relevant Commissioner checked. 
+final remarks: the run time can be considerable with very large datasets. To reduce wait time, run the script per Commissioner or group. This can be done by copying the template file, deleting the other EC's fines and only leaving the box for the relevant Commissioner checked. 
 
-When predicting new cases, if multple Commissioners are checked, only the fine according to the most recent Commissioner is predicted.
+When predicting new cases, if multple groups are checked, only the fine according to the last first checked value is predicted. If none is checked, the last group is checked by default.
+
+### updating the Templates
+
+The rows of the templated can be modified as long as the follow the template. This means new variables can be added, variable regex patterns can be changed, new training fines can be added, new commissioners can be added etc.
 
 ## Using the ANNEX script
 
