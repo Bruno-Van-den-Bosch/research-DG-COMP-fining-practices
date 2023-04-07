@@ -16,15 +16,15 @@ def NewModelCreation():
     '''
     # start opening window for file selection
     sg.theme('Light Blue 1')
-    layout = [[sg.Text('Please enter the necessary files to train the model')],
+    col_layout = [[sg.Text('Please enter the necessary files to train the model')],
           [sg.Text('Dataset of fines (excel template) :')],
             [sg.InputText(), sg.FileBrowse()],
           [sg.Text('Overview of (possible) variables (excel template) :')],
               [sg.InputText(), sg.FileBrowse()],
         [sg.Text("Folder EC Decisions (file name as: '[case number] [name].pdf', e.g. '123456 cartel.pdf' ")],
               [sg.InputText(), sg.FolderBrowse()],
-          [sg.Text("Which Commissioners are in the dataset")],
-              [sg.Checkbox('Neelie Kroes', default=True), sg.Checkbox('Joaquin Almunia', default=True), sg.Checkbox('Margrethe Vestager', default=True)],
+          [sg.Text("Filter dataset on (one option): ")],
+              [sg.Checkbox('Commissioner', default=True), sg.Checkbox('Year', default=False),sg.Text('Variable name: '),sg.InputText()],
         [sg.Text("what test set size (in float, e.g. 0.15)")],
               [sg.InputText(default_text=0.15)],
         [sg.Text("Enter the random integer for the random state")],
@@ -36,34 +36,27 @@ def NewModelCreation():
         [sg.Text("What maximum depth for the decision tree: ")],
               [sg.InputText(default_text=6)],
           [sg.Submit(), sg.Cancel()]]
+    layout = [[sg.Column(col_layout, scrollable=True, vertical_scroll_only=True, size_subsample_height=2)]]
     window = sg.Window('EC fine prediction program: new model', layout)
     event, values = window.read()
     window.close()
     # create the correct values
     if event == 'Submit':
         try:
-            location_data, location_variable, main_folder, Kroes, Almunia, Vestager, test_size, random_state, output_folder, extra_var_year, extra_var_sales, max_depth = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10], int(values[11])             # get the data from the values dictionary
+            location_data, location_variable, main_folder, Commissioner, Year, Var_name, test_size, random_state, output_folder, extra_var_year, extra_var_sales, max_depth = values[0], values[1], values[2], values[3], values[4], values[5], float(values[6]), int(values[7]), values[8], values[9], values[10], int(values[11])             # get the data from the values dictionary
             # start the program
-            if Kroes == Almunia == Vestager == True:
-                filters = ['Neelie Kroes', 'Joaquin Almunia', 'Margrethe Vestager']
-            elif Almunia == Vestager == True:
-                filters = ['Joaquin Almunia', 'Margrethe Vestager']
-            elif Kroes == Almunia == True:
-                filters = ['Neelie Kroes', 'Joaquin Almunia']
-            elif Kroes == Vestager == True:
-                filters = ['Neelie Kroes', 'Margrethe Vestager']
-            elif Kroes == True:
-                filters = ['Neelie Kroes']
-            elif Almunia == True:
-                filters = ['Joaquin Almunia']
-            elif Vestager == True:
-                filters = ['Margrethe Vestager']
+            if Commissioner:
+                filter_value = "Commissioner"
+            elif Year:
+                filter_value = "Year"
+            elif Var_name not in  (' ', '', '  ','   ',None):
+                filter_value = Var_name
             else:
-                filters = ['Margrethe Vestager']
+                filter_value = "Commissioner"
             sg.theme('Light Blue 1')
             sg.popup_quick_message('Model in progress. Given large datasets, this could take a while. Please wait.')
             # create the model and create the decision tree files
-            models, variable_names = predictions(location_data, main_folder, location_variable, filter_on=(filters), filter_value="Commissioner", test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
+            models, variable_names = predictions(location_data, main_folder, location_variable, filter_value=filter_value, test_size=test_size, random_state=random_state, file_output_folder=output_folder, extra_var_year=extra_var_year, extra_var_sales=extra_var_sales, max_depth=max_depth)  # filter value needs to be value with capital  begin letter (from dataframe)
             output_values = (models, variable_names, extra_var_year, extra_var_sales)
         except:
             sg.popup_ok('Something went wrong with the entered values.\n Did you leave certain values blank and are all your values valid?')
@@ -80,11 +73,11 @@ def loadLastModel():
         ,[sg.Submit(), sg.Cancel()]]
         window = sg.Window('Choose previous model from file', layout)
         event, values = window.read()
+        window.close()
         if event == 'Submit':
             fileObj = open(values[0], 'rb')
             first_return = pickle.load(fileObj)  #  models, variable_names, extra_var_year, extra_var_sales
             fileObj.close()
-            window.close()
             # ask where to save the decision trees
             sg.theme('Light Blue 1')
             layout = [[sg.Text("Select the location to save the decision trees, otherwise just hit 'do not save': "), sg.InputText(),
@@ -124,7 +117,7 @@ def welcomeScreen():
         first_return = loadLastModel()
     else:
         first_return = False
-    return first_return  # models, variable_names, extra_var_year, extra_var_sales
+    return first_return  # models, variable_names extra_var_year, extra_var_sales
 
 # start screen to predict fines
 def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales):
@@ -138,29 +131,29 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
         if name not in ('Year', 'Sales'):
             layout.append([sg.Checkbox(name, default=False)])
             count += 1
-    layout.append([sg.Text("duration (in years, float accepted): "), sg.InputText(default_text=1)])
-    layout.append([sg.Text("post fine reduction e.g. leniency: "), sg.InputText(default_text=0)])
-    layout.append([sg.Checkbox('EC Vestager', default=False)])
-    layout.append([sg.Checkbox('EC Almunia', default=False)])
-    layout.append([sg.Checkbox('EC Kroes', default=False)])
-    layout.append([sg.Text("sales: "), sg.InputText(default_text=10000)])
-    layout.append([sg.Text("case year: "), sg.InputText(default_text=2023)])
+    count -= 1  # count is now the values position of each variable
+    layout.append([sg.Text("duration (in years, float accepted): "), sg.InputText(default_text=1)]) # count +1
+    layout.append([sg.Text("post fine reduction e.g. leniency: "), sg.InputText(default_text=0)])  # count +2
+    layout.append([sg.Text("sales: "), sg.InputText(default_text=10000)]) # count +3
+    layout.append([sg.Text("case year: "), sg.InputText(default_text=2023)])  # count +4
+    count_2 = 0
+    layout.append([sg.Text("Select the group you want to predict on (filter values): ")])
+    for commis in models.keys():
+        layout.append([sg.Checkbox(commis, default=False)])
+        count_2 += 1
     layout.append([sg.Submit(), sg.Cancel()])
-    window = sg.Window('New case prediction selection', layout)
+    win_layout = [[sg.Column(layout, scrollable=True, vertical_scroll_only=True, size_subsample_height=2)]]
+    window = sg.Window('New case prediction selection', win_layout)
     event, values = window.read()
     window.close()
     if event == 'Submit':
         try:
-            if values[count+2]:
-                commissioner = 'Margrethe Vestager'
-            elif values[count+3]:
-                commissioner = 'Joaquin Almunia'
-            elif values[count + 3]:
-                commissioner = 'Neelie Kroes'
-            else:
-                commissioner = 'Margrethe Vestager'
+            commissioner = list(models.keys())[-1]
+            for el in range(0, len(models.keys())):
+                if values[count+4+1+el] is True:
+                    commissioner = list(models.keys())[int(el)]
             variables = []
-            for i in range(0, count):
+            for i in range(0, count+1):
                 variables.append(values[i])
             input_vars = {}
 
@@ -170,26 +163,26 @@ def finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales
                     input_vars[var_name] = [variables[i]]
                     i += 1
             elif extra_var_year is True and extra_var_sales is True:
-                for i in range(0, count):
+                for i in range(0, count+1):
                     input_vars[variable_names[i]] = [variables[i]]
-                input_vars["Year"] = [int(values[count + 5])]
-                input_vars["Sales"] = [float(values[count + 4])]
+                input_vars["Year"] = [int(values[count + 4])]
+                input_vars["Sales"] = [float(values[count + 3])]
             elif extra_var_sales is True:
-                for i in range(0, count):
+                for i in range(0, count+1):
                     input_vars[variable_names[i]] = [variables[i]]
-                input_vars["Sales"] = [float(values[count + 4])]
+                input_vars["Sales"] = [float(values[count + 3])]
             elif extra_var_year is True:
-                for i in range(0, count):
+                for i in range(0, count+1):
                     input_vars[variable_names[i]] = [variables[i]]
-                input_vars["Year"] = [int(values[count + 5])]
+                input_vars["Year"] = [int(values[count + 4])]
             variables = pd.DataFrame(input_vars)
             if commissioner in models.keys():
                 prediction_fine = predictNewFine(models, commissioner, variables, float(values[count]), float(values[count+1]), sales=float(values[count + 4]))
             else:
-                sg.popup_ok('You opted to predict for a Commissioner who is not in the loaded model. \nplease restart program en load the correct model or create a new one')
+                sg.popup_ok('You opted to predict for a group which is not in the loaded model. \nplease restart program en load the correct model or create a new one')
                 prediction_fine = False
         except:
-            sg.popup_ok('Something went wrong with entering the variables.\n A common error is  leaving the fill in values blank. These must be filled in for the prediction to occur')
+            sg.popup_ok('Something went wrong with entering the variables.\n A common error is  leaving the fill in values blank, or selecting a filter on a value with to few cases.')
             prediction_fine = False
     else:
         prediction_fine = False
@@ -209,9 +202,9 @@ def saveModelObject(models, variable_names, extra_var_year, extra_var_sales):
         [sg.Submit()]]
     window = sg.Window('Save model: enter model name', layout)
     event, values = window.read()
+    window.close()
     if event == 'Submit':
         model_name = values[0] + '.obj'
-        window.close()
         full_dir = os.path.join(values[1])
         if not os.path.exists(full_dir):
             os.makedirs(full_dir)
@@ -239,7 +232,8 @@ def modelLoadedScreen(models):
     layout.append([sg.Text('If you want to save the current model for later use, check the box: ')])
     layout.append([sg.Checkbox('Save current model', default=False)])
     layout.append([sg.Button('Predict case'), sg.Exit()])
-    window = sg.Window('Model has been created', layout)
+    win_layout = [[sg.Column(layout, scrollable=True, vertical_scroll_only=True, size_subsample_height=2)]]
+    window = sg.Window('Model has been created', win_layout)
     event, values = window.read()
     window.close()
     next_step = bool(event == 'Predict case')
@@ -278,10 +272,10 @@ def casePredictionsLoop(models, variable_names, extra_var_year, extra_var_sales)
             layout.append([sg.Submit(), sg.Button('Exit')])
             window = sg.Window('EC Fine Prediction Results', layout)
             event, values = window.read()
+            window.close()
             if event == sg.WIN_CLOSED or event == 'Exit':
                 break
             finepredictions = finePredictionScreen(models, variable_names, extra_var_year, extra_var_sales)
-            window.close()
 
 
 ######## START ACTUAL PROGRAM ###########
