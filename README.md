@@ -81,7 +81,7 @@ When predicting new cases, if multple groups are checked, only the fine accordin
 
 ### updating the Templates
 
-The rows of the templated can be modified as long as the follow the template. This means new variables can be added, variable regex patterns can be changed, new training fines can be added, new commissioners can be added etc.
+The rows of the templated can be modified as long as the follow template is followed (do not change the top row). This means new variables can be added, variable regex patterns can be changed, new training fines can be added, new commissioners can be added etc.
 
 ## Using the ANNEX script
 
