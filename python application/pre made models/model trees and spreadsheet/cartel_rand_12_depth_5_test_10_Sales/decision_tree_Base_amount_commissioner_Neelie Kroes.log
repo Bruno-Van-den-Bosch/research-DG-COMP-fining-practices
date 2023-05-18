@@ -1,0 +1,47 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- value: [0.21]
+|   |--- Sales >  10156108.50
+|   |   |--- implemented <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- implemented >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- allocated_market <= 0.50
+|   |   |   |--- follow_my_leader <= 0.50
+|   |   |   |   |--- Sales <= 14028997.12
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- Sales >  14028997.12
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |--- follow_my_leader >  0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |--- allocated_market >  0.50
+|   |   |   |--- value: [0.16]
+|   |--- national_cartel >  0.50
+|   |   |--- failed_cooperate <= 0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- value: [0.18]
+|   |   |--- failed_cooperate >  0.50
+|   |   |   |--- value: [0.21]
+
+The summary statistics for this model on Base_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.9392772317662946
+R2_test_set is :0.5157524353558294

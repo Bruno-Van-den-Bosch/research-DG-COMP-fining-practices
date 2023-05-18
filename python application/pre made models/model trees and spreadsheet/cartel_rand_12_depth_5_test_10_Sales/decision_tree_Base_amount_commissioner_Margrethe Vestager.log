@@ -1,0 +1,35 @@
+|--- price_fixing <= 0.50
+|   |--- implemented <= 0.50
+|   |   |--- very_large_turnover <= 0.50
+|   |   |   |--- value: [0.16]
+|   |   |--- very_large_turnover >  0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- value: [0.16]
+|   |--- implemented >  0.50
+|   |   |--- value: [0.18]
+|--- price_fixing >  0.50
+|   |--- Sales <= 487637840.00
+|   |   |--- crisis <= 0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- implemented <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- implemented >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- value: [0.18]
+|   |   |--- crisis >  0.50
+|   |   |   |--- EU_company <= 0.50
+|   |   |   |   |--- value: [0.15]
+|   |   |   |--- EU_company >  0.50
+|   |   |   |   |--- value: [0.15]
+|   |--- Sales >  487637840.00
+|   |   |--- value: [0.18]
+
+The summary statistics for this model on Base_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.733051011331554
+R2_test_set is :0.6678054842104175

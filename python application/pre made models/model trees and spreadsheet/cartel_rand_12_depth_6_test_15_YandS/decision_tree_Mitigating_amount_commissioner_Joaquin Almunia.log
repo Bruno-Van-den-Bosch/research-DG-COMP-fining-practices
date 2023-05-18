@@ -1,0 +1,41 @@
+|--- covered_entire_EEA <= 0.50
+|   |--- Year <= 2013.50
+|   |   |--- Sales <= 43897500.00
+|   |   |   |--- value: [0.00]
+|   |   |--- Sales >  43897500.00
+|   |   |   |--- Sales <= 46130668.00
+|   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  46130668.00
+|   |   |   |   |--- implemented <= 0.50
+|   |   |   |   |   |--- EU_company <= 0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- EU_company >  0.50
+|   |   |   |   |   |   |--- value: [0.05]
+|   |   |   |   |--- implemented >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |--- Year >  2013.50
+|   |   |--- price_fixing <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- price_fixing >  0.50
+|   |   |   |--- value: [0.10]
+|--- covered_entire_EEA >  0.50
+|   |--- Sales <= 90500212.00
+|   |   |--- Sales <= 80818964.00
+|   |   |   |--- Sales <= 73924304.00
+|   |   |   |   |--- Sales <= 19174372.00
+|   |   |   |   |   |--- Sales <= 17370735.00
+|   |   |   |   |   |   |--- value: [0.04]
+|   |   |   |   |   |--- Sales >  17370735.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  19174372.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  73924304.00
+|   |   |   |   |--- value: [0.15]
+|   |   |--- Sales >  80818964.00
+|   |   |   |--- value: [0.33]
+|   |--- Sales >  90500212.00
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.769426034247431
+R2_test_set is :0.12116159521628023

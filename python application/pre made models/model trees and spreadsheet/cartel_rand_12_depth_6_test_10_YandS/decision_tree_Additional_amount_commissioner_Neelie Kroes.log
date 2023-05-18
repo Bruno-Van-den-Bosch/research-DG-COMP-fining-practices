@@ -1,0 +1,56 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- Sales <= 6851260.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  6851260.50
+|   |   |   |   |   |   |--- value: [0.25]
+|   |--- Sales >  10156108.50
+|   |   |--- follow_my_leader <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- follow_my_leader >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- local_cartel <= 0.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |--- local_cartel >  0.50
+|   |   |   |--- value: [0.17]
+|   |--- national_cartel >  0.50
+|   |   |--- failed_cooperate <= 0.50
+|   |   |   |--- Year <= 2008.50
+|   |   |   |   |--- unaware_unlawful <= 0.50
+|   |   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- unaware_unlawful >  0.50
+|   |   |   |   |   |--- Sales <= 31516376.00
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  31516376.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |--- Year >  2008.50
+|   |   |   |   |--- Sales <= 57814.99
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  57814.99
+|   |   |   |   |   |--- Sales <= 6473823.50
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |   |--- Sales >  6473823.50
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |--- failed_cooperate >  0.50
+|   |   |   |--- value: [0.20]
+
+The summary statistics for this model on Additional_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.9918962136595636
+R2_test_set is :0.724921714717633

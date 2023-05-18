@@ -1,0 +1,50 @@
+|--- covered_entire_EEA <= 0.50
+|   |--- Sales <= 43897500.00
+|   |   |--- Sales <= 12465.37
+|   |   |   |--- EU_company <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- EU_company >  0.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |   |--- value: [0.06]
+|   |   |--- Sales >  12465.37
+|   |   |   |--- value: [0.00]
+|   |--- Sales >  43897500.00
+|   |   |--- Sales <= 46130668.00
+|   |   |   |--- value: [0.20]
+|   |   |--- Sales >  46130668.00
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- EU_company <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- EU_company >  0.50
+|   |   |   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |   |   |--- value: [0.05]
+|   |   |   |   |   |--- national_cartel >  0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.00]
+|--- covered_entire_EEA >  0.50
+|   |--- Sales <= 90500212.00
+|   |   |--- Sales <= 80818964.00
+|   |   |   |--- Sales <= 73924304.00
+|   |   |   |   |--- Sales <= 19174372.00
+|   |   |   |   |   |--- Sales <= 17370735.00
+|   |   |   |   |   |   |--- value: [0.04]
+|   |   |   |   |   |--- Sales >  17370735.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  19174372.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  73924304.00
+|   |   |   |   |--- value: [0.15]
+|   |   |--- Sales >  80818964.00
+|   |   |   |--- value: [0.33]
+|   |--- Sales >  90500212.00
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.7187727025794676
+R2_test_set is :-0.2163992862998505

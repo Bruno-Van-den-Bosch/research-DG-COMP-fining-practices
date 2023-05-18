@@ -1,0 +1,44 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- value: [0.21]
+|   |--- Sales >  10156108.50
+|   |   |--- implemented <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- implemented >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- unaware_unlawful <= 0.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |--- unaware_unlawful >  0.50
+|   |   |   |--- value: [0.17]
+|   |--- national_cartel >  0.50
+|   |   |--- failed_cooperate <= 0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- value: [0.18]
+|   |   |--- failed_cooperate >  0.50
+|   |   |   |--- value: [0.20]
+
+The summary statistics for this model on Additional_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.937313438821636
+R2_test_set is :0.5125497398224679

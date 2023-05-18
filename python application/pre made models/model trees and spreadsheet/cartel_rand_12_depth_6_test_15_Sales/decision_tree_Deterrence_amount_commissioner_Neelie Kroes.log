@@ -1,0 +1,65 @@
+|--- very_large_turnover <= 0.50
+|   |--- price_fixing <= 0.50
+|   |   |--- Sales <= 3368750.00
+|   |   |   |--- value: [0.20]
+|   |   |--- Sales >  3368750.00
+|   |   |   |--- Sales <= 20076220.00
+|   |   |   |   |--- Sales <= 9306250.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  9306250.00
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |--- Sales >  20076220.00
+|   |   |   |   |--- value: [0.00]
+|   |--- price_fixing >  0.50
+|   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |--- Sales <= 41530116.00
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  41530116.00
+|   |   |   |   |--- EU_company <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- EU_company >  0.50
+|   |   |   |   |   |--- value: [0.10]
+|   |   |--- covered_entire_EEA >  0.50
+|   |   |   |--- Sales <= 3979949.25
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  3979949.25
+|   |   |   |   |--- Sales <= 5341228.00
+|   |   |   |   |   |--- value: [0.20]
+|   |   |   |   |--- Sales >  5341228.00
+|   |   |   |   |   |--- value: [0.00]
+|--- very_large_turnover >  0.50
+|   |--- Sales <= 21599575.00
+|   |   |--- Sales <= 18852288.00
+|   |   |   |--- Sales <= 13991732.00
+|   |   |   |   |--- Sales <= 10016390.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  10016390.50
+|   |   |   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- national_cartel >  0.50
+|   |   |   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  13991732.00
+|   |   |   |   |--- value: [0.40]
+|   |   |--- Sales >  18852288.00
+|   |   |   |--- value: [1.00]
+|   |--- Sales >  21599575.00
+|   |   |--- recidivism <= 0.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- Sales <= 30093859.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  30093859.00
+|   |   |   |   |   |--- Sales <= 37749362.00
+|   |   |   |   |   |   |--- value: [0.10]
+|   |   |   |   |   |--- Sales >  37749362.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |--- recidivism >  0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- value: [0.40]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- value: [0.00]
+
+The summary statistics for this model on Deterrence_amount by Commissioner Neelie Kroes is
+R2_train_set is :1.0
+R2_test_set is :-0.7259847961299242

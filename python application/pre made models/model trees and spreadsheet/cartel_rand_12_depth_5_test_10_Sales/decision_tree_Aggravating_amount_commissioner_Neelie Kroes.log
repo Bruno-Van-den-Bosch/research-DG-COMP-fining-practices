@@ -1,0 +1,41 @@
+|--- Sales <= 575256384.00
+|   |--- EU_company <= 0.50
+|   |   |--- avoided_collusion <= 0.50
+|   |   |   |--- Sales <= 8484848.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  8484848.50
+|   |   |   |   |--- Sales <= 20359477.50
+|   |   |   |   |   |--- value: [0.37]
+|   |   |   |   |--- Sales >  20359477.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |--- avoided_collusion >  0.50
+|   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |--- Sales <= 26638720.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  26638720.00
+|   |   |   |   |   |--- value: [0.50]
+|   |   |   |--- price_fixing >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |--- EU_company >  0.50
+|   |   |--- Sales <= 2941.18
+|   |   |   |--- recidivism <= 0.50
+|   |   |   |   |--- value: [1.00]
+|   |   |   |--- recidivism >  0.50
+|   |   |   |   |--- value: [0.50]
+|   |   |--- Sales >  2941.18
+|   |   |   |--- Sales <= 26949058.00
+|   |   |   |   |--- Sales <= 3052287.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  3052287.50
+|   |   |   |   |   |--- value: [0.12]
+|   |   |   |--- Sales >  26949058.00
+|   |   |   |   |--- Sales <= 202639944.00
+|   |   |   |   |   |--- value: [0.42]
+|   |   |   |   |--- Sales >  202639944.00
+|   |   |   |   |   |--- value: [0.00]
+|--- Sales >  575256384.00
+|   |--- value: [0.60]
+
+The summary statistics for this model on Aggravating_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.6438261089743045
+R2_test_set is :-0.5323949582986136

@@ -1,0 +1,59 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- Sales <= 6851260.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  6851260.50
+|   |   |   |   |   |   |--- value: [0.25]
+|   |--- Sales >  10156108.50
+|   |   |--- follow_my_leader <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- follow_my_leader >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- failed_cooperate <= 0.50
+|   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |--- Sales <= 8828333.25
+|   |   |   |   |--- Sales <= 2941.18
+|   |   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- Sales >  2941.18
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  8828333.25
+|   |   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- national_cartel >  0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |--- covered_entire_EEA >  0.50
+|   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- price_fixing >  0.50
+|   |   |   |   |--- Year <= 2008.50
+|   |   |   |   |   |--- Sales <= 31516376.00
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  31516376.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Year >  2008.50
+|   |   |   |   |   |--- Sales <= 6473823.50
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |   |--- Sales >  6473823.50
+|   |   |   |   |   |   |--- value: [0.18]
+|   |--- failed_cooperate >  0.50
+|   |   |--- unaware_unlawful <= 0.50
+|   |   |   |--- value: [0.18]
+|   |   |--- unaware_unlawful >  0.50
+|   |   |   |--- value: [0.21]
+
+The summary statistics for this model on Base_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.9921387535451968
+R2_test_set is :0.7246142901605084

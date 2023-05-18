@@ -1,0 +1,44 @@
+|--- crisis <= 0.50
+|   |--- price_fixing <= 0.50
+|   |   |--- implemented <= 0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |--- implemented >  0.50
+|   |   |   |--- value: [0.18]
+|   |--- price_fixing >  0.50
+|   |   |--- Sales <= 487637840.00
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- Sales <= 116036116.00
+|   |   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- Sales >  116036116.00
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- implemented <= 0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |   |--- implemented >  0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- Sales <= 31301652.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |   |--- Sales >  31301652.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |--- Sales >  487637840.00
+|   |   |   |--- value: [0.18]
+|--- crisis >  0.50
+|   |--- Sales <= 6505582.00
+|   |   |--- value: [0.15]
+|   |--- Sales >  6505582.00
+|   |   |--- value: [0.15]
+
+The summary statistics for this model on Additional_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.8460767653035425
+R2_test_set is :-0.19479662403331277

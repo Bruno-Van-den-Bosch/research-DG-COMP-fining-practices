@@ -1,0 +1,44 @@
+|--- Sales <= 56662158.00
+|   |--- Sales <= 2941.18
+|   |   |--- Year <= 2008.50
+|   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |--- value: [0.60]
+|   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- Year >  2008.50
+|   |   |   |--- value: [0.00]
+|   |--- Sales >  2941.18
+|   |   |--- price_fixing <= 0.50
+|   |   |   |--- Sales <= 3368750.00
+|   |   |   |   |--- value: [0.18]
+|   |   |   |--- Sales >  3368750.00
+|   |   |   |   |--- Sales <= 20076220.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  20076220.00
+|   |   |   |   |   |--- Sales <= 26638720.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |   |--- Sales >  26638720.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |--- price_fixing >  0.50
+|   |   |   |--- Sales <= 212716.95
+|   |   |   |   |--- local_cartel <= 0.50
+|   |   |   |   |   |--- value: [0.01]
+|   |   |   |   |--- local_cartel >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  212716.95
+|   |   |   |   |--- value: [0.00]
+|--- Sales >  56662158.00
+|   |--- very_large_turnover <= 0.50
+|   |   |--- Sales <= 378589728.00
+|   |   |   |--- value: [0.60]
+|   |   |--- Sales >  378589728.00
+|   |   |   |--- value: [0.00]
+|   |--- very_large_turnover >  0.50
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Neelie Kroes is
+R2_train_set is :1.0
+R2_test_set is :1.0

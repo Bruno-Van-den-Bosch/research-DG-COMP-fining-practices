@@ -1,0 +1,23 @@
+|--- negligence <= 0.50
+|   |--- value: [0.00]
+|--- negligence >  0.50
+|   |--- Sales <= 12465.37
+|   |   |--- very_large_turnover <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- very_large_turnover >  0.50
+|   |   |   |--- value: [0.50]
+|   |--- Sales >  12465.37
+|   |   |--- very_large_turnover <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- very_large_turnover >  0.50
+|   |   |   |--- Sales <= 8182277.25
+|   |   |   |   |--- Sales <= 6742951.25
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  6742951.25
+|   |   |   |   |   |--- value: [0.60]
+|   |   |   |--- Sales >  8182277.25
+|   |   |   |   |--- value: [0.00]
+
+The summary statistics for this model on Aggravating_amount by Commissioner Joaquin Almunia is
+R2_train_set is :1.0
+R2_test_set is :-0.02941176470588225

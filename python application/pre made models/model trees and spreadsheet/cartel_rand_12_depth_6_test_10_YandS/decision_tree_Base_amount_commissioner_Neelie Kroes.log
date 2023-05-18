@@ -1,0 +1,59 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- Sales <= 6851260.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  6851260.50
+|   |   |   |   |   |   |--- value: [0.25]
+|   |--- Sales >  10156108.50
+|   |   |--- follow_my_leader <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- follow_my_leader >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- allocated_market <= 0.50
+|   |   |   |--- Year <= 2007.50
+|   |   |   |   |--- value: [0.18]
+|   |   |   |--- Year >  2007.50
+|   |   |   |   |--- local_cartel <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- local_cartel >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |--- allocated_market >  0.50
+|   |   |   |--- value: [0.16]
+|   |--- national_cartel >  0.50
+|   |   |--- Year <= 2007.50
+|   |   |   |--- value: [0.21]
+|   |   |--- Year >  2007.50
+|   |   |   |--- Year <= 2008.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- Sales <= 31516376.00
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  31516376.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |--- Year >  2008.50
+|   |   |   |   |--- Sales <= 57814.99
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  57814.99
+|   |   |   |   |   |--- Sales <= 6473823.50
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |   |--- Sales >  6473823.50
+|   |   |   |   |   |   |--- value: [0.18]
+
+The summary statistics for this model on Base_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.9921500824017824
+R2_test_set is :0.7267290621899218

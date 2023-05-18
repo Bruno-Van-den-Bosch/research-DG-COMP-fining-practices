@@ -1,0 +1,65 @@
+|--- avoided_collusion <= 0.50
+|   |--- Sales <= 10156108.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.25]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- Sales <= 3669346.38
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  3669346.38
+|   |   |   |   |--- Sales <= 5244117.75
+|   |   |   |   |   |--- value: [0.25]
+|   |   |   |   |--- Sales >  5244117.75
+|   |   |   |   |   |--- Sales <= 6851260.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  6851260.50
+|   |   |   |   |   |   |--- value: [0.25]
+|   |--- Sales >  10156108.50
+|   |   |--- implemented <= 0.50
+|   |   |   |--- value: [0.15]
+|   |   |--- implemented >  0.50
+|   |   |   |--- value: [0.17]
+|--- avoided_collusion >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- unaware_unlawful <= 0.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |--- unaware_unlawful >  0.50
+|   |   |   |--- value: [0.17]
+|   |--- national_cartel >  0.50
+|   |   |--- Year <= 2008.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |--- dominant_market_share <= 0.50
+|   |   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |   |--- dominant_market_share >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |--- Sales <= 31516376.00
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  31516376.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.20]
+|   |   |--- Year >  2008.50
+|   |   |   |--- Sales <= 6473823.50
+|   |   |   |   |--- Sales <= 4496403.50
+|   |   |   |   |   |--- Sales <= 1084200.00
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |   |--- Sales >  1084200.00
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |--- Sales >  4496403.50
+|   |   |   |   |   |--- EU_company <= 0.50
+|   |   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |   |--- EU_company >  0.50
+|   |   |   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  6473823.50
+|   |   |   |   |--- Sales <= 7065263.25
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  7065263.25
+|   |   |   |   |   |--- value: [0.19]
+
+The summary statistics for this model on Additional_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.9951846208829449
+R2_test_set is :0.7210828318147686

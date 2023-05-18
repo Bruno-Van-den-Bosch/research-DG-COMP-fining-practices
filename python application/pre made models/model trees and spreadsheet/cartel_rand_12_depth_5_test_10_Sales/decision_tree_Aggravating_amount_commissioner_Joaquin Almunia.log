@@ -1,0 +1,20 @@
+|--- Sales <= 12465.37
+|   |--- national_cartel <= 0.50
+|   |   |--- value: [0.00]
+|   |--- national_cartel >  0.50
+|   |   |--- very_large_turnover <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- very_large_turnover >  0.50
+|   |   |   |--- value: [0.50]
+|--- Sales >  12465.37
+|   |--- Sales <= 8060495.00
+|   |   |--- Sales <= 7994403.25
+|   |   |   |--- value: [0.00]
+|   |   |--- Sales >  7994403.25
+|   |   |   |--- value: [0.60]
+|   |--- Sales >  8060495.00
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Aggravating_amount by Commissioner Joaquin Almunia is
+R2_train_set is :1.0
+R2_test_set is :1.0

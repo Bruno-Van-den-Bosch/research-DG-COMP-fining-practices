@@ -1,0 +1,68 @@
+|--- very_large_turnover <= 0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- Sales <= 5501599.75
+|   |   |   |   |--- Sales <= 837328.31
+|   |   |   |   |   |--- value: [0.01]
+|   |   |   |   |--- Sales >  837328.31
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |--- Sales >  5501599.75
+|   |   |   |   |--- Sales <= 487637840.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  487637840.00
+|   |   |   |   |   |--- value: [0.05]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- unaware_unlawful <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- unaware_unlawful >  0.50
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- implemented <= 0.50
+|   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |--- implemented >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |--- national_cartel >  0.50
+|   |   |--- Sales <= 36247924.00
+|   |   |   |--- Sales <= 4005750.62
+|   |   |   |   |--- value: [0.15]
+|   |   |   |--- Sales >  4005750.62
+|   |   |   |   |--- Sales <= 14640625.00
+|   |   |   |   |   |--- value: [0.22]
+|   |   |   |   |--- Sales >  14640625.00
+|   |   |   |   |   |--- value: [0.25]
+|   |   |--- Sales >  36247924.00
+|   |   |   |--- value: [0.15]
+|--- very_large_turnover >  0.50
+|   |--- Sales <= 4682396.75
+|   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- covered_entire_EEA >  0.50
+|   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- national_cartel >  0.50
+|   |   |   |   |--- usa_company <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- usa_company >  0.50
+|   |   |   |   |   |--- value: [0.10]
+|   |--- Sales >  4682396.75
+|   |   |--- Sales <= 12196349.00
+|   |   |   |--- Sales <= 11330169.00
+|   |   |   |   |--- Sales <= 6525233.00
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |   |--- Sales >  6525233.00
+|   |   |   |   |   |--- value: [0.01]
+|   |   |   |--- Sales >  11330169.00
+|   |   |   |   |--- value: [0.20]
+|   |   |--- Sales >  12196349.00
+|   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- national_cartel >  0.50
+|   |   |   |   |--- Sales <= 37355284.00
+|   |   |   |   |   |--- value: [0.04]
+|   |   |   |   |--- Sales >  37355284.00
+|   |   |   |   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.9464343248102061
+R2_test_set is :0.507008547008547

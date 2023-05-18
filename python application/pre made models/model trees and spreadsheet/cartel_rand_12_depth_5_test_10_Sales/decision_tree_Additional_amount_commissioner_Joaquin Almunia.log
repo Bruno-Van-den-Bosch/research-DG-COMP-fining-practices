@@ -1,0 +1,50 @@
+|--- unaware_unlawful <= 0.50
+|   |--- very_large_turnover <= 0.50
+|   |   |--- follow_my_leader <= 0.50
+|   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |--- allocated_market >  0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |--- follow_my_leader >  0.50
+|   |   |   |--- EU_company <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- EU_company >  0.50
+|   |   |   |   |--- Sales <= 6004724.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  6004724.50
+|   |   |   |   |   |--- value: [0.16]
+|   |--- very_large_turnover >  0.50
+|   |   |--- allocated_market <= 0.50
+|   |   |   |--- Sales <= 5875705.50
+|   |   |   |   |--- Sales <= 4967500.00
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- Sales >  4967500.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  5875705.50
+|   |   |   |   |--- avoided_collusion <= 0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- avoided_collusion >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |--- allocated_market >  0.50
+|   |   |   |--- implemented <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- implemented >  0.50
+|   |   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- national_cartel >  0.50
+|   |   |   |   |   |--- value: [0.18]
+|--- unaware_unlawful >  0.50
+|   |--- very_large_turnover <= 0.50
+|   |   |--- national_cartel <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- national_cartel >  0.50
+|   |   |   |--- value: [0.15]
+|   |--- very_large_turnover >  0.50
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Additional_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.9940177787972829
+R2_test_set is :0.9637210743006848

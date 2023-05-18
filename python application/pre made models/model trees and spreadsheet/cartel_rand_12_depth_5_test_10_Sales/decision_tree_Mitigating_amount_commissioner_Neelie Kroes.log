@@ -1,0 +1,41 @@
+|--- Sales <= 56662158.00
+|   |--- Sales <= 2941.18
+|   |   |--- national_cartel <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- national_cartel >  0.50
+|   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |--- unaware_unlawful <= 0.50
+|   |   |   |   |   |--- value: [0.30]
+|   |   |   |   |--- unaware_unlawful >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |--- Sales >  2941.18
+|   |   |--- price_fixing <= 0.50
+|   |   |   |--- Sales <= 3368750.00
+|   |   |   |   |--- value: [0.18]
+|   |   |   |--- Sales >  3368750.00
+|   |   |   |   |--- Sales <= 20076220.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  20076220.00
+|   |   |   |   |   |--- value: [0.09]
+|   |   |--- price_fixing >  0.50
+|   |   |   |--- Sales <= 212716.95
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- value: [0.01]
+|   |   |   |--- Sales >  212716.95
+|   |   |   |   |--- value: [0.00]
+|--- Sales >  56662158.00
+|   |--- very_large_turnover <= 0.50
+|   |   |--- avoided_collusion <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- avoided_collusion >  0.50
+|   |   |   |--- value: [0.60]
+|   |--- very_large_turnover >  0.50
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.8203281913667644
+R2_test_set is :1.0

@@ -1,0 +1,47 @@
+|--- recidivism <= 0.50
+|   |--- covered_entire_EEA <= 0.50
+|   |   |--- Sales <= 348185240.00
+|   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |--- Sales <= 1638250.28
+|   |   |   |   |   |--- Sales <= 837328.31
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- Sales >  837328.31
+|   |   |   |   |   |   |--- value: [0.50]
+|   |   |   |   |--- Sales >  1638250.28
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- Sales >  348185240.00
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.50]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |--- covered_entire_EEA >  0.50
+|   |   |--- usa_company <= 0.50
+|   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- Sales <= 10279933.00
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |   |--- Sales >  10279933.00
+|   |   |   |   |   |   |--- value: [0.50]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- national_cartel >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- usa_company >  0.50
+|   |   |   |--- EU_company <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- EU_company >  0.50
+|   |   |   |   |--- Sales <= 61005225.00
+|   |   |   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- national_cartel >  0.50
+|   |   |   |   |   |   |--- value: [0.50]
+|   |   |   |   |--- Sales >  61005225.00
+|   |   |   |   |   |--- value: [0.00]
+|--- recidivism >  0.50
+|   |--- value: [0.50]
+
+The summary statistics for this model on Aggravating_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.9271604938271605
+R2_test_set is :0.0

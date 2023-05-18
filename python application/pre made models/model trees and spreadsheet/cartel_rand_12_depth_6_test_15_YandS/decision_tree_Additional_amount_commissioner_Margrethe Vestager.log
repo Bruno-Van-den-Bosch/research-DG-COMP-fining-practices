@@ -1,0 +1,32 @@
+|--- Year <= 2014.00
+|   |--- value: [0.18]
+|--- Year >  2014.00
+|   |--- price_fixing <= 0.50
+|   |   |--- implemented <= 0.50
+|   |   |   |--- Year <= 2017.50
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- Year >  2017.50
+|   |   |   |   |--- value: [0.16]
+|   |   |--- implemented >  0.50
+|   |   |   |--- value: [0.18]
+|   |--- price_fixing >  0.50
+|   |   |--- crisis <= 0.50
+|   |   |   |--- Year <= 2019.00
+|   |   |   |   |--- follow_my_leader <= 0.50
+|   |   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- follow_my_leader >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |--- Year >  2019.00
+|   |   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |--- crisis >  0.50
+|   |   |   |--- value: [0.15]
+
+The summary statistics for this model on Additional_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.8741232172083235
+R2_test_set is :0.9726562500000002

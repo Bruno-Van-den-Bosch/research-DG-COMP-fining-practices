@@ -1,0 +1,59 @@
+|--- unaware_unlawful <= 0.50
+|   |--- very_large_turnover <= 0.50
+|   |   |--- follow_my_leader <= 0.50
+|   |   |   |--- usa_company <= 0.50
+|   |   |   |   |--- value: [0.17]
+|   |   |   |--- usa_company >  0.50
+|   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |--- follow_my_leader >  0.50
+|   |   |   |--- Year <= 2013.00
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Year >  2013.00
+|   |   |   |   |--- value: [0.16]
+|   |--- very_large_turnover >  0.50
+|   |   |--- allocated_market <= 0.50
+|   |   |   |--- Year <= 2010.50
+|   |   |   |   |--- Sales <= 6312500.00
+|   |   |   |   |   |--- Sales <= 2937500.00
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |   |--- Sales >  2937500.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  6312500.00
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |--- Year >  2010.50
+|   |   |   |   |--- Year <= 2011.50
+|   |   |   |   |   |--- usa_company <= 0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |   |--- usa_company >  0.50
+|   |   |   |   |   |   |--- value: [0.17]
+|   |   |   |   |--- Year >  2011.50
+|   |   |   |   |   |--- avoided_collusion <= 0.50
+|   |   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |   |--- avoided_collusion >  0.50
+|   |   |   |   |   |   |--- value: [0.16]
+|   |   |--- allocated_market >  0.50
+|   |   |   |--- implemented <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- implemented >  0.50
+|   |   |   |   |--- Year <= 2011.00
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- Year >  2011.00
+|   |   |   |   |   |--- Sales <= 30864747.00
+|   |   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |   |--- Sales >  30864747.00
+|   |   |   |   |   |   |--- value: [0.18]
+|--- unaware_unlawful >  0.50
+|   |--- very_large_turnover <= 0.50
+|   |   |--- negligence <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- negligence >  0.50
+|   |   |   |--- value: [0.15]
+|   |--- very_large_turnover >  0.50
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Additional_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.9957841136196943
+R2_test_set is :0.949638872577804

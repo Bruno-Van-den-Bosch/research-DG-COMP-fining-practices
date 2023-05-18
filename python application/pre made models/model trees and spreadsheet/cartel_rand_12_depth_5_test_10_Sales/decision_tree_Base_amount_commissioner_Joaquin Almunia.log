@@ -1,0 +1,59 @@
+|--- very_large_turnover <= 0.50
+|   |--- covered_entire_EEA <= 0.50
+|   |   |--- usa_company <= 0.50
+|   |   |   |--- value: [0.17]
+|   |   |--- usa_company >  0.50
+|   |   |   |--- value: [0.15]
+|   |--- covered_entire_EEA >  0.50
+|   |   |--- unaware_unlawful <= 0.50
+|   |   |   |--- Sales <= 7439660.25
+|   |   |   |   |--- Sales <= 5424398.75
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- Sales >  5424398.75
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |--- Sales >  7439660.25
+|   |   |   |   |--- value: [0.16]
+|   |   |--- unaware_unlawful >  0.50
+|   |   |   |--- value: [0.17]
+|--- very_large_turnover >  0.50
+|   |--- national_cartel <= 0.50
+|   |   |--- allocated_market <= 0.50
+|   |   |   |--- avoided_collusion <= 0.50
+|   |   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |   |--- value: [0.15]
+|   |   |   |   |--- price_fixing >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- avoided_collusion >  0.50
+|   |   |   |   |--- recidivism <= 0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |   |   |--- recidivism >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |   |--- allocated_market >  0.50
+|   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |--- value: [0.16]
+|   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |--- value: [0.16]
+|   |--- national_cartel >  0.50
+|   |   |--- unaware_unlawful <= 0.50
+|   |   |   |--- Sales <= 35262760.00
+|   |   |   |   |--- Sales <= 5631676.75
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |   |--- Sales >  5631676.75
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- Sales >  35262760.00
+|   |   |   |   |--- value: [0.19]
+|   |   |--- unaware_unlawful >  0.50
+|   |   |   |--- Sales <= 13481228.00
+|   |   |   |   |--- Sales <= 8182277.25
+|   |   |   |   |   |--- value: [0.19]
+|   |   |   |   |--- Sales >  8182277.25
+|   |   |   |   |   |--- value: [0.18]
+|   |   |   |--- Sales >  13481228.00
+|   |   |   |   |--- value: [0.19]
+
+The summary statistics for this model on Base_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.9597973036324886
+R2_test_set is :0.8696640083038988

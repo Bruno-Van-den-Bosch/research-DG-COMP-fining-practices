@@ -1,0 +1,41 @@
+|--- unaware_unlawful <= 0.50
+|   |--- price_fixing <= 0.50
+|   |   |--- Sales <= 3368750.00
+|   |   |   |--- value: [0.20]
+|   |   |--- Sales >  3368750.00
+|   |   |   |--- Sales <= 20076220.00
+|   |   |   |   |--- Sales <= 9306250.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  9306250.00
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |--- Sales >  20076220.00
+|   |   |   |   |--- value: [0.00]
+|   |--- price_fixing >  0.50
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- avoided_collusion <= 0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- avoided_collusion >  0.50
+|   |   |   |   |--- Sales <= 3979949.25
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  3979949.25
+|   |   |   |   |   |--- value: [0.06]
+|--- unaware_unlawful >  0.50
+|   |--- Sales <= 393872.55
+|   |   |--- value: [0.00]
+|   |--- Sales >  393872.55
+|   |   |--- Sales <= 680147.06
+|   |   |   |--- value: [1.00]
+|   |   |--- Sales >  680147.06
+|   |   |   |--- Sales <= 10016390.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  10016390.50
+|   |   |   |   |--- Sales <= 21599575.00
+|   |   |   |   |   |--- value: [0.53]
+|   |   |   |   |--- Sales >  21599575.00
+|   |   |   |   |   |--- value: [0.05]
+
+The summary statistics for this model on Deterrence_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.7668835855461439
+R2_test_set is :-0.5080225632661128

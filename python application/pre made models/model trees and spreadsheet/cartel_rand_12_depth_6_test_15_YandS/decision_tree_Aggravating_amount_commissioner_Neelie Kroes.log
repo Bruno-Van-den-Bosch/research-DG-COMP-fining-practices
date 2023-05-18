@@ -1,0 +1,50 @@
+|--- Sales <= 575256384.00
+|   |--- EU_company <= 0.50
+|   |   |--- avoided_collusion <= 0.50
+|   |   |   |--- Sales <= 8484848.50
+|   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  8484848.50
+|   |   |   |   |--- Sales <= 20359477.50
+|   |   |   |   |   |--- Sales <= 10447712.50
+|   |   |   |   |   |   |--- value: [0.30]
+|   |   |   |   |   |--- Sales >  10447712.50
+|   |   |   |   |   |   |--- value: [0.50]
+|   |   |   |   |--- Sales >  20359477.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |--- avoided_collusion >  0.50
+|   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |--- Sales <= 26638720.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  26638720.00
+|   |   |   |   |   |--- value: [0.50]
+|   |   |   |--- price_fixing >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |--- EU_company >  0.50
+|   |   |--- Sales <= 2941.18
+|   |   |   |--- national_cartel <= 0.50
+|   |   |   |   |--- value: [1.00]
+|   |   |   |--- national_cartel >  0.50
+|   |   |   |   |--- value: [0.50]
+|   |   |--- Sales >  2941.18
+|   |   |   |--- Sales <= 26949058.00
+|   |   |   |   |--- Sales <= 3052287.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  3052287.50
+|   |   |   |   |   |--- Sales <= 3753545.75
+|   |   |   |   |   |   |--- value: [0.70]
+|   |   |   |   |   |--- Sales >  3753545.75
+|   |   |   |   |   |   |--- value: [0.05]
+|   |   |   |--- Sales >  26949058.00
+|   |   |   |   |--- follow_my_leader <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- follow_my_leader >  0.50
+|   |   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |   |--- value: [0.55]
+|   |   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |   |--- value: [0.33]
+|--- Sales >  575256384.00
+|   |--- value: [0.60]
+
+The summary statistics for this model on Aggravating_amount by Commissioner Neelie Kroes is
+R2_train_set is :0.8416006485632052
+R2_test_set is :-0.4240249476696998

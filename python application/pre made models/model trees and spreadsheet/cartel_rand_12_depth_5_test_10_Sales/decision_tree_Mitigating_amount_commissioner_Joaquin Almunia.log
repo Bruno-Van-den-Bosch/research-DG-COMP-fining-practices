@@ -1,0 +1,41 @@
+|--- covered_entire_EEA <= 0.50
+|   |--- Sales <= 12465.37
+|   |   |--- failed_cooperate <= 0.50
+|   |   |   |--- negligence <= 0.50
+|   |   |   |   |--- implemented <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- implemented >  0.50
+|   |   |   |   |   |--- value: [0.10]
+|   |   |   |--- negligence >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- failed_cooperate >  0.50
+|   |   |   |--- value: [0.00]
+|   |--- Sales >  12465.37
+|   |   |--- Sales <= 43897500.00
+|   |   |   |--- value: [0.00]
+|   |   |--- Sales >  43897500.00
+|   |   |   |--- Sales <= 46130668.00
+|   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  46130668.00
+|   |   |   |   |--- failed_cooperate <= 0.50
+|   |   |   |   |   |--- value: [0.01]
+|   |   |   |   |--- failed_cooperate >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|--- covered_entire_EEA >  0.50
+|   |--- Sales <= 90500212.00
+|   |   |--- Sales <= 80818964.00
+|   |   |   |--- Sales <= 73924304.00
+|   |   |   |   |--- Sales <= 19174372.00
+|   |   |   |   |   |--- value: [0.04]
+|   |   |   |   |--- Sales >  19174372.00
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- Sales >  73924304.00
+|   |   |   |   |--- value: [0.15]
+|   |   |--- Sales >  80818964.00
+|   |   |   |--- value: [0.33]
+|   |--- Sales >  90500212.00
+|   |   |--- value: [0.00]
+
+The summary statistics for this model on Mitigating_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.6547364826729261
+R2_test_set is :-0.18146555944773834

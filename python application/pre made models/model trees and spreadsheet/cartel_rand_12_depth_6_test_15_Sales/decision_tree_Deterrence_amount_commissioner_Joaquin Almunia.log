@@ -1,0 +1,71 @@
+|--- failed_cooperate <= 0.50
+|   |--- Sales <= 12465.37
+|   |   |--- EU_company <= 0.50
+|   |   |   |--- value: [0.00]
+|   |   |--- EU_company >  0.50
+|   |   |   |--- negligence <= 0.50
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- value: [0.17]
+|   |   |   |--- negligence >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |--- Sales >  12465.37
+|   |   |--- Sales <= 35180748.00
+|   |   |   |--- Sales <= 4110466.50
+|   |   |   |   |--- Sales <= 3598023.25
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- Sales >  3598023.25
+|   |   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  4110466.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- Sales >  35180748.00
+|   |   |   |--- Sales <= 38647244.00
+|   |   |   |   |--- value: [0.20]
+|   |   |   |--- Sales >  38647244.00
+|   |   |   |   |--- unaware_unlawful <= 0.50
+|   |   |   |   |   |--- Sales <= 488476736.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- Sales >  488476736.00
+|   |   |   |   |   |   |--- value: [0.10]
+|   |   |   |   |--- unaware_unlawful >  0.50
+|   |   |   |   |   |--- very_large_turnover <= 0.50
+|   |   |   |   |   |   |--- value: [0.10]
+|   |   |   |   |   |--- very_large_turnover >  0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|--- failed_cooperate >  0.50
+|   |--- EU_company <= 0.50
+|   |   |--- Sales <= 34553099.00
+|   |   |   |--- value: [0.00]
+|   |   |--- Sales >  34553099.00
+|   |   |   |--- Sales <= 65915736.00
+|   |   |   |   |--- value: [0.10]
+|   |   |   |--- Sales >  65915736.00
+|   |   |   |   |--- value: [0.00]
+|   |--- EU_company >  0.50
+|   |   |--- Sales <= 1669642.88
+|   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |--- value: [0.20]
+|   |   |   |--- allocated_market >  0.50
+|   |   |   |   |--- value: [0.00]
+|   |   |--- Sales >  1669642.88
+|   |   |   |--- Sales <= 86200848.00
+|   |   |   |   |--- Sales <= 14007124.00
+|   |   |   |   |   |--- Sales <= 8744841.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- Sales >  8744841.00
+|   |   |   |   |   |   |--- value: [0.07]
+|   |   |   |   |--- Sales >  14007124.00
+|   |   |   |   |   |--- Sales <= 68065992.00
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |   |--- Sales >  68065992.00
+|   |   |   |   |   |   |--- value: [0.05]
+|   |   |   |--- Sales >  86200848.00
+|   |   |   |   |--- recidivism_xl <= 0.50
+|   |   |   |   |   |--- value: [0.20]
+|   |   |   |   |--- recidivism_xl >  0.50
+|   |   |   |   |   |--- value: [0.00]
+
+The summary statistics for this model on Deterrence_amount by Commissioner Joaquin Almunia is
+R2_train_set is :0.8357391737182678
+R2_test_set is :-0.2250117988133764

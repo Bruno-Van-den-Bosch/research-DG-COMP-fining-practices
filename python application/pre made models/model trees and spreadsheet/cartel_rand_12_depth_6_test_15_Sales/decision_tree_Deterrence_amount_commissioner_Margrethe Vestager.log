@@ -1,0 +1,50 @@
+|--- avoided_collusion <= 0.50
+|   |--- recidivism_xl <= 0.50
+|   |   |--- Sales <= 164747.19
+|   |   |   |--- EU_company <= 0.50
+|   |   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- price_fixing >  0.50
+|   |   |   |   |   |--- unaware_unlawful <= 0.50
+|   |   |   |   |   |   |--- value: [0.12]
+|   |   |   |   |   |--- unaware_unlawful >  0.50
+|   |   |   |   |   |   |--- value: [0.20]
+|   |   |   |--- EU_company >  0.50
+|   |   |   |   |--- allocated_market <= 0.50
+|   |   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |   |--- value: [0.10]
+|   |   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |   |--- value: [0.02]
+|   |   |   |   |--- allocated_market >  0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |--- Sales >  164747.19
+|   |   |   |--- usa_company <= 0.50
+|   |   |   |   |--- covered_entire_EEA <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- covered_entire_EEA >  0.50
+|   |   |   |   |   |--- EU_company <= 0.50
+|   |   |   |   |   |   |--- value: [0.07]
+|   |   |   |   |   |--- EU_company >  0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |   |   |--- usa_company >  0.50
+|   |   |   |   |--- price_fixing <= 0.50
+|   |   |   |   |   |--- value: [0.00]
+|   |   |   |   |--- price_fixing >  0.50
+|   |   |   |   |   |--- negligence <= 0.50
+|   |   |   |   |   |   |--- value: [0.11]
+|   |   |   |   |   |--- negligence >  0.50
+|   |   |   |   |   |   |--- value: [0.00]
+|   |--- recidivism_xl >  0.50
+|   |   |--- usa_company <= 0.50
+|   |   |   |--- value: [0.10]
+|   |   |--- usa_company >  0.50
+|   |   |   |--- value: [0.30]
+|--- avoided_collusion >  0.50
+|   |--- crisis <= 0.50
+|   |   |--- value: [0.00]
+|   |--- crisis >  0.50
+|   |   |--- value: [0.10]
+
+The summary statistics for this model on Deterrence_amount by Commissioner Margrethe Vestager is
+R2_train_set is :0.8130189929328622
+R2_test_set is :-0.15756097560975668
