@@ -60,7 +60,7 @@ The files are:
 
 To  use the application the following dependencies need to be installed:
 
-- PySimpleGUI
+- PySimpleGUI (this package came under license after this application was built, alternatives will be sought)
 - pandas
 - re
 - pypdf
